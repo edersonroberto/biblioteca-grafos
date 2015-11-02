@@ -12,7 +12,7 @@ import biblioteca.Aresta;
 import biblioteca.Grafo;
 import biblioteca.Vertice;
 
-public class TestaGrafo {
+public class TestaBuscaPorLargura {
 	
 	private Grafo grafo;
 	private Aresta aresta1, aresta2, aresta3,aresta4;
@@ -82,12 +82,25 @@ public class TestaGrafo {
 		
 	}
 	
+
 	@Test
-	public void testeBuscaPorLargura2(){
+	public void testeBuscaPorProfundidade(){
 		
+		String resultado = "";
+		
+		resultado = grafo.buscaPorProfundidade(vertice1, vertice4);
+		System.out.println(resultado);
 	}
 	
-	
+	@Ignore
+	@Test
+	public void testeBuscaPorProfundidadeOrdemInversa(){
+		
+		String resultado = "";
+		
+		resultado = grafo.buscaPorProfundidade(vertice4, vertice1);
+		System.out.println(resultado);
+	}
 	
 	
 	

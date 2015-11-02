@@ -1,7 +1,9 @@
 package biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Grafo {
 		
@@ -36,9 +38,81 @@ public class Grafo {
 			
 		}
 	}
+	
+	
+	public String buscaPorProfundidade(Vertice origem, Vertice alvo){
+		
+		Aresta aresta = new Aresta();
+		Vertice verticeAtual = null;
+		List<Vertice> lista = new ArrayList<Vertice>();
+		String caminho = "", vizinhos = "";
+		Set<Vertice> verticesVisitados = new HashSet<Vertice>();
+		int cont = 1;
+		
+		lista.add(origem);
+		verticeAtual = origem;
+		
+		while(!verticeAtual.equals(alvo)){
+			verticesVisitados.add(verticeAtual);
+			caminho+= verticeAtual.getNome() + " foi visitado.\n";
+			
+			for (int i = 0; i < arestas.size(); i++){
+				aresta = arestas.get(i);
+				vizinhos += verificaVertices(aresta, verticeAtual, lista);
+			}
+			
+			if (vizinhos.trim().length() == 1){
+				caminho += vizinhos + "é vizinho de " + verticeAtual.getNome() + ".\n";
+			}else if (vizinhos.trim().length() > 1){
+				caminho += vizinhos +"são vizinhos de " + verticeAtual.getNome() + ".\n";
+			}
+			
+			vizinhos = "";
+			verticeAtual = lista.get(cont);
+			cont ++;
+		}
+		
+		caminho += verticeAtual.getNome() + " foi visitado.\n";
+		if (verticeAtual.equals(alvo)){
+			caminho += "Destino " + verticeAtual.getNome() + " foi encontrado.";
+		}else{
+			caminho += "Destino não encontrado.";
+		}
+		
+		return caminho;
+
+	}
 
 
+	private String verificaVertices(Aresta aresta, Vertice verticeAtual, List<Vertice> lista) {
+		
+		String caminho = "";
+		
+		if(aresta.getVertice1() == verticeAtual){
+			caminho += trataVertice(aresta.getVertice1(), aresta.getVertice2(), lista);
+		}else if (aresta.getVertice2() == verticeAtual){
+			caminho += trataVertice(aresta.getVertice2(), aresta.getVertice1(), lista);
 
+		}		
+		
+		return caminho;
+	}
+
+	private String trataVertice(Vertice analisado, Vertice vizinho, List<Vertice> lista) {
+		
+		int posNaLista;
+		posNaLista = lista.indexOf(analisado);
+		posNaLista ++;
+		
+		String caminho = "";
+		caminho += vizinho.getNome() + " ";
+		if (!lista.contains(vizinho)) {
+			lista.add(posNaLista, vizinho);
+		}
+		
+		return caminho;
+	}
+	
 	public String buscaPorLargura(Vertice origem, Vertice alvo){
 		Aresta aresta = new Aresta();
 		Vertice verticeAtual = null;
@@ -101,6 +175,7 @@ public class Grafo {
 
 	public String Dijkstra(Vertice origem, Vertice destino){
 		
+		Vertice verticeAtual = new Vertice();
 		List<Vertice> naoVisitados = new ArrayList<Vertice>();
 		List<TabelaDistancia> distancias = new ArrayList<TabelaDistancia>();
 		TabelaDistancia distancia = new TabelaDistancia();
@@ -109,7 +184,11 @@ public class Grafo {
 			distancia.setV(vertice);
 			distancia.setDistancia(2147483647);
 			distancias.add(distancia);
+			naoVisitados.add(vertice);
 		}
+		
+		verticeAtual = origem;
+
 		
 		return "";
 	}

@@ -9,8 +9,4 @@ public class GrafoDirecionado extends Grafo{
 		super(vertices, arestas);
 		// TODO Auto-generated constructor stub
 	}
-
-
-	
-
 }

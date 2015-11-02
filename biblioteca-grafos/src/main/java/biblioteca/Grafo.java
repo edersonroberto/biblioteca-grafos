@@ -1,6 +1,7 @@
 package biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -174,23 +175,72 @@ public class Grafo {
 	}
 
 	public String Dijkstra(Vertice origem, Vertice destino){
-		
+		Aresta aresta = new Aresta();
 		Vertice verticeAtual = new Vertice();
+		Vertice maisProxVerticeAtual = new Vertice();
 		List<Vertice> naoVisitados = new ArrayList<Vertice>();
-		List<TabelaDistancia> distancias = new ArrayList<TabelaDistancia>();
-		TabelaDistancia distancia = new TabelaDistancia();
+		HashMap<Vertice, Integer> distancias = new HashMap<Vertice, Integer>();
+		HashMap<Vertice, Vertice> anteriores = new HashMap<Vertice, Vertice>();
+		int distancia = 0 ;
+		String retorno = "";
 		
+		//Percorre o vertice, coloca o na tabela de distancias e adiciona o vertice na lista de não visitados
 		for (Vertice vertice : vertices) {
-			distancia.setV(vertice);
-			distancia.setDistancia(2147483647);
-			distancias.add(distancia);
+			distancias.put(vertice, 2147483647);
 			naoVisitados.add(vertice);
+			anteriores.put(vertice, null);
 		}
 		
 		verticeAtual = origem;
-
+		maisProxVerticeAtual = origem;
+		distancias.replace(verticeAtual, 0);
 		
-		return "";
+		//Faz um loop até que a lista de não visitados esteja vazia
+		while(!naoVisitados.isEmpty()){
+			
+			naoVisitados.remove(verticeAtual);
+			
+			for (int i=0; i < arestas.size(); i++){
+				aresta = arestas.get(i);
+				
+				if(aresta.getVertice1() == verticeAtual ){
+					distancia= 0;
+					distancia = distancias.get(verticeAtual) + aresta.getPeso();
+						
+					//atualiza a tabela de distancia e vertices anteriores
+					if (distancias.get(aresta.getVertice2()) > distancia){
+						distancias.replace(aresta.getVertice2(), distancia);
+						anteriores.replace(aresta.getVertice2(), verticeAtual);
+					}
+					//verifica qual o vertice mais proximo do atual
+					if(verticeAtual.equals(maisProxVerticeAtual)){
+						maisProxVerticeAtual = aresta.getVertice2();
+					}
+					if (distancias.get(aresta.getVertice2()) < distancias.get(maisProxVerticeAtual)){
+						maisProxVerticeAtual = aresta.getVertice2();
+					}
+				}
+			}
+			verticeAtual = maisProxVerticeAtual;
+			
+		}
+		if(anteriores.containsKey(destino)){
+			Vertice v = new Vertice();
+			retorno = destino.getNome();
+			v = destino;
+			while (anteriores.get(v)!= null){
+				retorno =  anteriores.get(v).getNome() + " -> " + retorno;
+				v = anteriores.get(v);
+			}			
+		}
+		
+		return retorno;
+	}
+
+	public void addVertices(Vertice vertice) {
+
+		vertices.add(vertice);
+		
 	}
 
 }

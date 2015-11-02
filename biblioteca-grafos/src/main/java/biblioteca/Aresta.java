@@ -5,7 +5,7 @@ public class Aresta {
 	private String nome;
 	private Vertice vertice1;
 	private Vertice vertice2;
-	private String peso;
+	private int peso;
 	
 	//Gets and Setters
 	public String getNome() {
@@ -26,12 +26,13 @@ public class Aresta {
 	public void setVertice2(Vertice vertice2) {
 		this.vertice2 = vertice2;
 	}
-	public String getPeso() {
+	public int getPeso() {
 		return peso;
 	}
-	public void setPeso(String peso) {
+	public void setPeso(int peso) {
 		this.peso = peso;
 	}
+
 	
 	
 	

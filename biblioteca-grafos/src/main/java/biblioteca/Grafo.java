@@ -12,9 +12,9 @@ public class Grafo {
 	private List<Aresta> arestas;
 	private String matAdj[][];
 
-	public Grafo(ArrayList<Vertice> vertices, ArrayList<Aresta> arestas) {
-		this.vertices = vertices;
-		this.arestas = arestas;
+	public Grafo(List<Vertice> vertices2, List<Aresta> arestas2) {
+		this.vertices = vertices2;
+		this.arestas = arestas2;
 		//montaMatAdj();
 	}
 	

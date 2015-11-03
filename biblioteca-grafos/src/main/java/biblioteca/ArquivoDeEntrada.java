@@ -11,15 +11,17 @@ import java.util.List;
 public class ArquivoDeEntrada {
 
 	private Grafo grafo;
-	private List<Vertice> vertices;
-	private List<Aresta> arestas;
+	private List<String> vertices;
+	private int arrayAdjacencia[][] = {};
 	private FileInputStream arquivo;
 	private InputStreamReader isr;
 	private BufferedReader br;
 	private boolean temPeso;
 	private boolean ehDirecionado;
-	private Vertice origem;
-	private Vertice destino;
+	private String origem;
+	private String destino;
+	String linha = "";
+	String caracteres[] = {};
 
 	public static void main(String[] args) {
 		ArquivoDeEntrada arquivoEntrada = new ArquivoDeEntrada();
@@ -33,7 +35,7 @@ public class ArquivoDeEntrada {
 			isr = new InputStreamReader(arquivo);
 			br = new BufferedReader(isr);
 
-			montaGrafo(arquivo);
+			leArquivo(arquivo);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -45,103 +47,93 @@ public class ArquivoDeEntrada {
 
 	}
 
-	private void montaGrafo(FileInputStream arquivo) throws IOException {
-		String linha;
-		vertices = new ArrayList<Vertice>();
-		arestas = new ArrayList<Aresta>();
+	private void leArquivo(FileInputStream arquivo) throws IOException {
+		linha = br.readLine();
+
+		montaGrafo();
 		linha = br.readLine();
 		
-		do {
-			System.out.println(linha);
-			if (linha.toLowerCase().equals("grafo")) {
-				linha = br.readLine();
-				montaVertice(linha);
-				linha = br.readLine();
-				if (linha.equals(true))
-					ehDirecionado = true;
-				
-				linha = br.readLine();
-				if (linha.equals(true))
-					temPeso = true;
-
-			}
-			if (linha.toLowerCase().equals("arestas")) {
-				linha = br.readLine();
-				while (!linha.equals("")) {
-					montaArestas(linha);
-					linha = br.readLine();
-				}
-			}
-			if(linha.toLowerCase().equals("comandos")){
-				grafo = new Grafo(vertices, arestas);
-				linha = br.readLine();
-				montaComandos();
-			}
-			linha = br.readLine();
-		} while (linha != null);
+		executaComandos();
 
 	}
 
-	private void montaComandos() throws IOException {
-		String linha = br.readLine();
-		String caracteres[] = linha.split(" ");
+	private void executaComandos() throws IOException {
 		
-		if (caracteres[0].toLowerCase().equals("distancia")){
+		while(!(linha.equals("")) || (linha != null)){
+			linha = br.readLine();
+			caracteres = linha.split(" ");
+			if (caracteres[0].toLowerCase().contains("distancia")){
+				//executa metodo para descobrir a distancia
+			}
+			if (caracteres[0].toLowerCase().contains("profundidade")){
+				//executa busca por profundidade
+			}
+			if (caracteres[0].toLowerCase().contains("largura")){
+				//executa busca por largura
+			}
+			if (caracteres[0].toLowerCase().contains("menor caminho")){
+				//executa algoritmo de dijska
+			}
 			
 		}
-		if (caracteres[0].toLowerCase().equals("profundidade")) {
-			origem.setNome(caracteres[1]);
-			destino.setNome(caracteres[2]);
-			executaBuscaPorProfundiade(origem, destino);
+		
+	}
+
+	private void montaGrafo() throws IOException {
+		montaVertice();
+
+		// Verifica se o vertice é direcionado e se ele tem peso
+		if (br.readLine().equals("true"))
+			ehDirecionado = true;
+		if (br.readLine().equals("true"))
+			temPeso = true;
+
+		montaArrayAdjacencia();
+		
+		//grafo = new Grafo ();
+
+	}
+
+	private void montaArrayAdjacencia() throws IOException {
+		int tamArray = vertices.size() - 1;
+		arrayAdjacencia = new int[tamArray][tamArray];
+
+		while (!linha.toLowerCase().equals("arestas")) {
+			linha = br.readLine();
 		}
-		if	(caracteres[0].toLowerCase().equals("largura")){
 	
+		while (!linha.equals("")) {
+			linha = br.readLine();
+			linha = linha.replaceAll(",", "");
+			caracteres = linha.split(" ");
+			for (int i = 0; i < vertices.size() - 1; i++) {
+				if (vertices.get(i).equals(caracteres[0])) {
+					for (int j = 0; j < vertices.size() - 1; j++) {
+						if (caracteres[1].equals(Integer.toString(j))) {
+							arrayAdjacencia[i][j] = 1;
+						}
+					}
+					break;
+				}
+			}
 		}
-		if(caracteres[0].toLowerCase().equals("Menor Caminho")) {	
-		
-		}
-		
-	}
-
-	private void executaBuscaPorProfundiade(Vertice origem2, Vertice destino2) {
-
-		grafo.buscaPorProfundidade(origem2, destino);
-		
-	}
-
-	private void montaArestas(String linha) {
-		int cont = 1;
-		Aresta aresta = new Aresta();
-		Vertice vertice1 = new Vertice();
-		Vertice vertice2 = new Vertice();
-		String caracteres[] = {};
-		caracteres = linha.split(" ");
-
-		aresta.setNome(caracteres[0] + caracteres[1]);
-		vertice1.setNome(caracteres[0]);
-		vertice2.setNome(caracteres[1]);
-		aresta.setVertice1(vertice1);
-		aresta.setVertice2(vertice2);
-		arestas.add(aresta);
 
 	}
 
-	private void montaVertice(String linha) {
-		Vertice vertice = new Vertice();
-		String caracteres[] = {};
-		caracteres = linha.split(" ");
+	private void montaVertice() throws IOException {
+		
+		vertices = new ArrayList<String>();
+		
+		String linha = br.readLine();
+		String caracteres[] = linha.split(" ");
 
 		for (String caracter : caracteres) {
 			if (caracter.contains(";")) {
 				String subCaracteres[] = caracter.split(";");
-				vertice.setNome(subCaracteres[0]);
-				vertices.add(vertice);
-			} else {
-				vertice.setNome(caracter);
-				vertices.add(vertice);
+				vertices.add(subCaracteres[0]);
+				continue;
 			}
+			vertices.add(caracter);
 		}
-
 	}
-
 }

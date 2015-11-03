@@ -10,34 +10,12 @@ public class Grafo {
 		
 	private List<Vertice> vertices;
 	private List<Aresta> arestas;
-	private String matAdj[][];
+	private int matAdj[][];
 
 	public Grafo(List<Vertice> vertices2, List<Aresta> arestas2) {
 		this.vertices = vertices2;
 		this.arestas = arestas2;
 		//montaMatAdj();
-	}
-	
-	private void montaMatAdj() {
-		
-		Vertice vertice = new Vertice();
-		Aresta aresta = new Aresta();
-		
-		matAdj = new String[vertices.size()][vertices.size()];
-		
-		for (int i=0; i< vertices.size(); i++){
-			vertice = vertices.get(i);
-			
-			for (int j=0; j<arestas.size(); i++ ){
-				aresta = arestas.get(j);
-				
-				if (aresta.getVertice1() == vertice){
-					
-					matAdj[i][j] = "1";
-				}
-			}
-			
-		}
 	}
 	
 	

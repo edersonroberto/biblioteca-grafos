@@ -22,8 +22,7 @@ public class TestaBuscaPorLargura {
 		
 		GrafoParaTeste grafoTeste = new GrafoParaTeste("simples");
 		grafo = grafoTeste.criaGrafo();
-		vertice1 = grafoTeste.recuperaVertice(1);
-		vertice2 = grafoTeste.recuperaVertice(4);
+
 		
 	}
 
@@ -34,7 +33,7 @@ public class TestaBuscaPorLargura {
 		String resultado = "";
 		String esperado = "A foi visitado.\nB C são vizinhos de A.\nB foi visitado.\nA C são vizinhos de B.\nC foi visitado.\nA B D são vizinhos de C.\nD foi visitado.\nDestino D foi encontrado.";
 		
-		resultado = grafo.buscaPorLargura(vertice1, vertice2);
+		resultado = grafo.buscaPorLargura("A", "D");
 		assertEquals(esperado, resultado);
 	}
 	
@@ -47,7 +46,7 @@ public class TestaBuscaPorLargura {
 		String resultado = "";
 		String esperado = "A foi visitado.\nB C são vizinhos de A.\nB foi visitado.\nA C são vizinhos de B.\nC foi visitado.\nA B D são vizinhos de C.\nD foi visitado.\nDestino não encontrado.";
 		
-		resultado = grafo.buscaPorLargura(vertice1, vertice5);
+		resultado = grafo.buscaPorLargura("A", "E");
 		assertEquals(esperado, resultado);
 	}
 	
@@ -57,7 +56,7 @@ public class TestaBuscaPorLargura {
 		
 		Vertice vertice5 = new Vertice();
 		vertice5.setNome("E");
-		grafo.addVertices(vertice5);
+		//grafo.addVertices(vertice5);
 		
 		String resultado = "";
 		
@@ -71,7 +70,7 @@ public class TestaBuscaPorLargura {
 		
 		String resultado = "";
 		
-		resultado = grafo.buscaPorProfundidade(vertice1, vertice2);
+		resultado = grafo.buscaPorProfundidade("A", "B");
 		System.out.println(resultado);
 	}
 	
@@ -81,7 +80,7 @@ public class TestaBuscaPorLargura {
 		
 		String resultado = "";
 		
-		resultado = grafo.buscaPorProfundidade(vertice2, vertice1);
+		resultado = grafo.buscaPorProfundidade("D", "A");
 		System.out.println(resultado);
 	}
 	

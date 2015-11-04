@@ -90,7 +90,7 @@ public class ArquivoDeEntrada {
 
 		montaArrayAdjacencia();
 		
-		//grafo = new Grafo ();
+		grafo = new Grafo (vertices, arrayAdjacencia);
 
 	}
 

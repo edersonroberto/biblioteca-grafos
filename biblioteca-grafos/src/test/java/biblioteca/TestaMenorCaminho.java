@@ -13,15 +13,13 @@ public class TestaMenorCaminho {
 		
 		GrafoParaTeste grafoTeste = new GrafoParaTeste("direcionado");
 		grafo = grafoTeste.criaGrafo();
-		origem = grafoTeste.recuperaVertice(0);
-		destino = grafoTeste.recuperaVertice(3);
 		
 	}
 	
 	@Test
 	public void testeMenorCaminho(){
 		String retorno;
-		retorno = grafo.Dijkstra(origem, destino);
+		retorno = grafo.Dijkstra("A", "B");
 		System.out.println(retorno);
 	}
 }

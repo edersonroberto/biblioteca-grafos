@@ -5,10 +5,9 @@ import java.util.ArrayList;
 public class GrafoParaTeste {
 
 	private Grafo grafo;
-	private Aresta aresta1, aresta2, aresta3,aresta4;
-	private Vertice vertice1, vertice2, vertice3, vertice4 ;
-	private ArrayList<Vertice> vertices;
-	private ArrayList<Aresta> arestas;
+	private String vertice1, vertice2, vertice3, vertice4 ;
+	private ArrayList<String> vertices;
+	private int matAdj[][];
 	
 	public GrafoParaTeste(String tipoGrafo) {
 
@@ -19,91 +18,39 @@ public class GrafoParaTeste {
 		inicializaListaVertices();
 
 		// inicializa as Arestas
-		inicializaArestas();
-
-		// inicializa lista de arestas
-		inicializaListaArestas();
+		//matAdj = new int [3][3];
+		matAdj = montaMatAdj(); 
 
 		// Grafo
-		grafo = new Grafo(vertices, arestas);
-		
-		if (tipoGrafo.equals("direcionado")){
-			setaPesoArestas();
-		}
+		grafo = new Grafo(vertices, matAdj);
 
 	}
 
-
-	private void setaPesoArestas() {
-		aresta1.setPeso(10);
-		aresta2.setPeso(14);
-		aresta3.setPeso(16);
-		aresta4.setPeso(11);
-		
+	private int[][] montaMatAdj() {
+		int matAdj[][] = {{0,1,1,0},
+			  	 		  {0,0,1,0},
+			  	 		  {0,0,0,1},
+			  	 		  {0,0,1,0}};
+		return matAdj;
 	}
-
 
 	//retorna o grafo criado no construtor
 	public Grafo criaGrafo(){
 		return grafo;
 	}
-	
-	
-	private void inicializaArestas() {
-		this.aresta1 = new Aresta();
-		this.aresta2 = new Aresta();
-		this.aresta3 = new Aresta();
-		this.aresta4 = new Aresta();
-		
-		aresta1.setNome("a1");
-		aresta1.setVertice1(vertice1);
-		aresta1.setVertice2(vertice2);
-		aresta1.setPeso(0);
-		
-		aresta2.setNome("a2");
-		aresta2.setVertice1(vertice1);
-		aresta2.setVertice2(vertice3);
-		aresta2.setPeso(0);
-		
-		aresta3.setNome("a3");
-		aresta3.setVertice1(vertice2);
-		aresta3.setVertice2(vertice3);
-		aresta3.setPeso(0);
-		
-		aresta4.setNome("a4");
-		aresta4.setVertice1(vertice3);
-		aresta4.setVertice2(vertice4);
-		aresta4.setPeso(0);
-	}
-	
 
-	private void inicializaListaArestas() {
-
-		arestas = new ArrayList<Aresta>();
-		
-		arestas.add(aresta1);
-		arestas.add(aresta2);
-		arestas.add(aresta3);
-		arestas.add(aresta4);
-		
-	}
-	
 
 	private void inicializaVertices() {
-		this.vertice1 = new Vertice();
-		this.vertice2 = new Vertice();
-		this.vertice3 = new Vertice();
-		this.vertice4 = new Vertice();
-		
-		vertice1.setNome("A");
-		vertice2.setNome("B");
-		vertice3.setNome("C");
-		vertice4.setNome("D");
+		vertice1 = "0";
+		vertice2 = "1";
+		vertice3 = "2";
+		vertice4 = "3";
+	
 		
 	}
 	
 	private void inicializaListaVertices() {
-		vertices = new ArrayList<Vertice>();
+		vertices = new ArrayList<String>();
 		
 		//Adiciona os vertices na lista
 		vertices.add(vertice1);
@@ -113,9 +60,5 @@ public class GrafoParaTeste {
 		
 	}
 
-	public Vertice recuperaVertice(int i) {
-		
-		return vertices.get(i);
-	}
 	
 }

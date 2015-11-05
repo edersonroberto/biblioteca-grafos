@@ -19,7 +19,7 @@ public class TestaMenorCaminho {
 	@Test
 	public void testeMenorCaminho(){
 		String retorno;
-		retorno = grafo.Dijkstra("A", "B");
+		retorno = grafo.Dijkstra("0", "3");
 		System.out.println(retorno);
 	}
 }

@@ -22,30 +22,31 @@ public class TestaBuscaPorProfundiade {
 
 	@Ignore
 	@Test
-	public void TesteBuscaPorLargura(){
+	public void TesteBuscaPorProfundidade(){
 		String resultado = "";
 		String esperado = "A foi visitado.\nB C são vizinhos de A.\nB foi visitado.\nA C são vizinhos de B.\nC foi visitado.\nA B D são vizinhos de C.\nD foi visitado.\nDestino D foi encontrado.";
 		
-		resultado = grafo.buscaPorLargura("A", "B");
+		resultado = grafo.buscaPorProfundidade("A", "B");
 		assertEquals(esperado, resultado);
 	}
-	@Ignore
+
 	@Test
-	public void TesteBuscaPorLarguraOrigemNaoExisteNoGrafo(){
-		
-		Vertice vertice5 = new Vertice();
-		vertice5.setNome("E");
+	public void TesteBuscaPorProfundidadeDestinoNaoExisteNoGrafo(){
 		
 		String resultado = "";
-		String esperado = "A foi visitado.\nB C são vizinhos de A.\nB foi visitado.\nA C são vizinhos de B.\nC foi visitado.\nA B D são vizinhos de C.\nD foi visitado.\nDestino não encontrado.";
+		String esperado = "0 foi visitado.\n1 2 são vizinhos de 0.\n1 foi visitado.\n"
+						+ "2 é vizinho de 1.\n2 foi visitado.\n"
+						+ "3 é vizinho de 2.\n"
+						+ "3 foi visitado.\n2 é vizinho de 3."
+						+ "\nDestino não encontrado.";
 		
-		resultado = grafo.buscaPorLargura("A", "E");
+		resultado = grafo.buscaPorProfundidade("0", "4");
 		assertEquals(esperado, resultado);
 	}
 	
 	@Ignore
 	@Test
-	public void testeBuscaPorLarguraGrafoDesconexo(){
+	public void testeBuscaPorProfundidadeGrafoDesconexo(){
 		
 		//Vertice vertice5 = new Vertice();
 		//vertice5.setNome("E");

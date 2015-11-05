@@ -23,7 +23,7 @@ public class Grafo {
 		List<String> lista = new ArrayList<String>();
 		String caminho = "";
 		Set<String> verticesVisitados = new HashSet<String>();
-		int cont = 1, qtdVerticesVizinhos = 0;
+		int cont = 1, qtdVerticesVizinhos = 0, qtdVerticesVizinhosAddLista = 0;
 		
 		lista.add(origem);
 		verticeAtual = origem;
@@ -38,8 +38,13 @@ public class Grafo {
 						if(matAdj[i][j] == 1){
 							caminho += vertices.get(j) + " ";
 							qtdVerticesVizinhos ++;
-							if(!lista.contains(vertices.get(j)))
-								lista.add(cont, vertices.get(j));
+							if(!lista.contains(vertices.get(j))){
+								qtdVerticesVizinhosAddLista ++;
+								if (qtdVerticesVizinhosAddLista > 1)
+									lista.add(cont+1, vertices.get(j));
+								else
+									lista.add(cont, vertices.get(j));
+							}
 						}
 					}
 				}
@@ -54,6 +59,7 @@ public class Grafo {
 				break;
 			
 			qtdVerticesVizinhos = 0;
+			qtdVerticesVizinhosAddLista = 0;
 			verticeAtual = lista.get(cont);
 			cont ++;
 		}
@@ -68,7 +74,7 @@ public class Grafo {
 
 	}
 
-public String buscaPorLargura(String origem, String alvo){
+	public String buscaPorLargura(String origem, String alvo){
 		
 		String verticeAtual = null;
 		List<String> lista = new ArrayList<String>();
@@ -122,12 +128,11 @@ public String buscaPorLargura(String origem, String alvo){
 	public String Dijkstra(String origem, String destino){
 
 		String verticeAtual = null;
-		String verticeMaisProxDoAtual = null;
 		List<String> naoVisitados = new ArrayList<String>();
 		List<String> verticesVizinhos = new ArrayList<String>();
 		HashMap<String, Integer> distancias = new HashMap<String, Integer>();
 		HashMap<String, String> anteriores = new HashMap<String, String>();
-		int distancia = 0, distanciaTotal = 0;
+		int distancia = 0;
 		String caminho = "";
 		
 		//Percorre o vertice, coloca o na tabela de distancias e adiciona o vertice na lista de não visitados
@@ -138,7 +143,6 @@ public String buscaPorLargura(String origem, String alvo){
 		}
 		
 		verticeAtual = origem;
-		verticeMaisProxDoAtual = origem;
 		distancias.replace(verticeAtual, 0);
 		
 		//Faz um loop até que a lista de não visitados esteja vazia
@@ -156,7 +160,7 @@ public String buscaPorLargura(String origem, String alvo){
 							
 							if(distancia < distancias.get(vertices.get(j))){
 								distancias.replace(vertices.get(j), distancia);
-								anteriores.replace(verticeAtual, vertices.get(j));
+								anteriores.replace(vertices.get(j), verticeAtual);
 							}
 						}
 					}
@@ -164,14 +168,14 @@ public String buscaPorLargura(String origem, String alvo){
 			}
 	
 			caminho+= verticeAtual + " " ;
-			
-			if(verticesVizinhos.size() == 1){
+			if (verticesVizinhos.size() == 0){
+				break;
+			}else if(verticesVizinhos.size() == 1){
 				verticeAtual = verticesVizinhos.get(0);
 			}else{
+				verticeAtual = verticesVizinhos.get(0);
 				for(int i=0; i <= verticesVizinhos.size() -2; i++){
-					if(distancias.get(verticesVizinhos.get(i)) < distancias.get(verticesVizinhos.get(i+1)))
-						verticeAtual = verticesVizinhos.get(i);
-					else
+					if(distancias.get(verticeAtual) > distancias.get(verticesVizinhos.get(i+1)))
 						verticeAtual = verticesVizinhos.get(i+1);
 				}
 			}
@@ -180,10 +184,10 @@ public String buscaPorLargura(String origem, String alvo){
 		
 		//for(int i=0; i < vertices.size(); i++){
 			if( anteriores.get(destino) != null){
-				distanciaTotal += distancias.get(destino);
-			}
+				caminho +="\n" + distancias.get(destino);
+			}else
+				caminho+="\nCaminho não encontrado!";
 		//}
-		caminho +="\n" + distanciaTotal;
 		
 		return caminho;
 	}

@@ -20,13 +20,10 @@ public class TestaBuscaPorLargura {
 	@Before
 	public void criaGrafo(){
 		
-		GrafoParaTeste grafoTeste = new GrafoParaTeste("simples");
-		grafo = grafoTeste.criaGrafo();
+		GrafoParaTeste grafoTeste = new GrafoParaTeste();
+		grafo = grafoTeste.criaGrafoSimples();
 
-		
 	}
-
-
 
 	@Test
 	public void TesteBuscaPorLargura(){

@@ -9,7 +9,7 @@ public class GrafoParaTeste {
 	private ArrayList<String> vertices;
 	private int matAdj[][];
 	
-	public GrafoParaTeste(String tipoGrafo) {
+	public GrafoParaTeste() {
 
 		// inicializa os Vertices
 		inicializaVertices();
@@ -29,16 +29,35 @@ public class GrafoParaTeste {
 	private int[][] montaMatAdj() {
 		int matAdj[][] = {{0,1,1,0},
 			  	 		  {1,0,1,0},
-			  	 		  {1,0,1,1},
+			  	 		  {1,1,0,1},
 			  	 		  {0,0,1,0}};
 		return matAdj;
 	}
 
 	//retorna o grafo criado no construtor
-	public Grafo criaGrafo(){
+	public Grafo criaGrafoSimples(){
 		return grafo;
 	}
-
+	
+	public Grafo criaGrafoDesconexo(){
+		this.inicializaVertices();
+		this.inicializaListaVertices();
+		int matAdj[][] ={{0,1,0,1},{1,0,0,1},{0,0,0,0},{1,1,0,0}}; 
+		
+		Grafo grafoDesconexo = new Grafo(this.vertices, matAdj);
+		
+		return grafoDesconexo;
+	}
+	
+	public Grafo criaGrafoPonderado(){
+		this.inicializaVertices();
+		this.inicializaListaVertices();
+		int matAdj[][] ={{0,10,0,12},{10,0,0,6},{0,0,0,9},{12,6,9,0}}; 
+		
+		Grafo grafoPonderado = new Grafo(this.vertices, matAdj);
+		
+		return grafoPonderado;
+	}
 
 	private void inicializaVertices() {
 		vertice1 = "0";

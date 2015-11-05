@@ -9,13 +9,12 @@ import org.junit.Test;
 public class TestaBuscaPorProfundiade {
 	
 	private Grafo grafo;
-	private Vertice vertice1, vertice2;
 
 	@Before
 	public void criaGrafo(){
 		
-		GrafoParaTeste grafoTeste = new GrafoParaTeste("simples");
-		grafo = grafoTeste.criaGrafo();
+		GrafoParaTeste grafoTeste = new GrafoParaTeste();
+		grafo = grafoTeste.criaGrafoSimples();
 		
 	}
 
@@ -24,7 +23,10 @@ public class TestaBuscaPorProfundiade {
 	@Test
 	public void TesteBuscaPorProfundidade(){
 		String resultado = "";
-		String esperado = "A foi visitado.\nB C são vizinhos de A.\nB foi visitado.\nA C são vizinhos de B.\nC foi visitado.\nA B D são vizinhos de C.\nD foi visitado.\nDestino D foi encontrado.";
+		String esperado = "A foi visitado.\nB C são vizinhos de A.\n"
+							+ "B foi visitado.\nA C são vizinhos de B.\n"
+							+ "C foi visitado.\nA B D são vizinhos de C.\n"
+							+ "D foi visitado.\nDestino D foi encontrado.";
 		
 		resultado = grafo.buscaPorProfundidade("A", "B");
 		assertEquals(esperado, resultado);
@@ -35,8 +37,8 @@ public class TestaBuscaPorProfundiade {
 		
 		String resultado = "";
 		String esperado = "0 foi visitado.\n1 2 são vizinhos de 0.\n1 foi visitado.\n"
-						+ "2 é vizinho de 1.\n2 foi visitado.\n"
-						+ "3 é vizinho de 2.\n"
+						+ "0 2 são vizinhos de 1.\n2 foi visitado.\n"
+						+ "0 1 3 são vizinhos de 2.\n"
 						+ "3 foi visitado.\n2 é vizinho de 3."
 						+ "\nDestino não encontrado.";
 		
@@ -58,14 +60,14 @@ public class TestaBuscaPorProfundiade {
 		
 	}
 	
-
+	@Ignore
 	@Test
 	public void testeBuscaPorProfundidade(){
 		
 		String resultado = "";
 		
 		resultado = grafo.buscaPorProfundidade("0", "3");
-		System.out.println(resultado);
+		
 	}
 	
 	@Ignore

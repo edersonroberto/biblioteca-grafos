@@ -35,7 +35,7 @@ public class Grafo {
 			for (int i = 0; i < vertices.size(); i++){
 				if(verticeAtual.equals(vertices.get(i))){
 					for(int j=0; j < vertices.size(); j++){
-						if(matAdj[i][j] == 1){
+						if(matAdj[i][j] != 0){
 							caminho += vertices.get(j) + " ";
 							qtdVerticesVizinhos ++;
 							if(!lista.contains(vertices.get(j))){
@@ -92,7 +92,7 @@ public class Grafo {
 			for (int i = 0; i < vertices.size(); i++){
 				if(verticeAtual.equals(vertices.get(i))){
 					for(int j=0; j < vertices.size(); j++){
-						if(matAdj[i][j] == 1){
+						if(matAdj[i][j] != 0){
 							caminho += vertices.get(j) + " ";
 							qtdVerticesVizinhos ++;
 							if(!lista.contains(vertices.get(j)))

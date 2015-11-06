@@ -48,7 +48,7 @@ public class TestaBuscaPorLargura {
 	
 		//grafo.addVertices(vertice5);
 		
-		String resultado = "";
+		//String resultado = "";
 		
 		//assertEquals(esperado, resultado);
 		

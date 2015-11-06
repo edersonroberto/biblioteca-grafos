@@ -64,9 +64,9 @@ public class TestaBuscaPorProfundiade {
 	@Test
 	public void testeBuscaPorProfundidade(){
 		
-		String resultado = "";
+		//String resultado = "";
 		
-		resultado = grafo.buscaPorProfundidade("0", "3");
+		//resultado = grafo.buscaPorProfundidade("0", "3");
 		
 	}
 	

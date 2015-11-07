@@ -19,4 +19,3 @@ Largura 0 3;
 Menor Caminho 0 3;
 Prim 2;
 Kruskal;
-

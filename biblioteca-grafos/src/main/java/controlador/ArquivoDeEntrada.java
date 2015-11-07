@@ -8,178 +8,50 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import biblioteca.Grafo;
-
 public class ArquivoDeEntrada {
 
-	private Grafo grafo;
-	private List<String> vertices;
-	private int arrayAdj[][] = {};
 	private FileInputStream arquivo;
 	private InputStreamReader isr;
 	private BufferedReader br;
-	private boolean temPeso;
-	private boolean ehDirecionado;
-	// private String origem;
-	// private String destino;
-	String linha = "";
-	String caracteres[] = {};
+	private List<String> linhasArquivo ;
+	private String linha = "";
 
-	public static void main(String[] args) throws IOException {
-		ArquivoDeEntrada arquivoEntrada = new ArquivoDeEntrada();
-		arquivoEntrada.trataArquivoDeEntrada();
-	}
 
-	public void trataArquivoDeEntrada() throws IOException {
-
+	public List<String> trataArquivoDeEntrada(String camArquivo) {
+		boolean foiLido;
+		
 		try {
-			arquivo = new FileInputStream("arquivo.txt");
+			arquivo = new FileInputStream(camArquivo);
 			isr = new InputStreamReader(arquivo);
 			br = new BufferedReader(isr);
-
-			leArquivo(arquivo);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+			foiLido = leArquivo(arquivo);
 			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Arquivo não encontrado" + e.getMessage());
+			foiLido =  false;
+		} catch (IOException e) {
+			System.out.println("Falha ao ler arquivo" + e.getMessage());
+			foiLido =  false;
 		}
-
-	}
-
-	private void leArquivo(FileInputStream arquivo) throws IOException {
-		linha = br.readLine();
-
-		montaGrafo();
-		linha = br.readLine();
-
-		executaComandos();
-
-	}
-
-	private void executaComandos() throws IOException {
-
-		String resultado = "";
-		while (!(linha.equals(""))) {
-			trataLinha(linha);
-
-			if (caracteres[0].toLowerCase().contains("distancia")) {
-				// executa metodo para descobrir a distancia
-			}
-			if (caracteres[0].toLowerCase().equals("profundidade")) {
-				resultado = grafo.buscaPorProfundidade(vertices.get(0),
-						vertices.get(vertices.size() - 1));
-				System.out.println(resultado);
-			}
-			if (caracteres[0].toLowerCase().equals("largura")) {
-				resultado = grafo.buscaPorLargura(vertices.get(0),
-						vertices.get(vertices.size() - 1));
-				System.out.println(resultado);
-			}
-			if (caracteres[0].toLowerCase().equals("menor")) {
-				resultado = grafo.Dijkstra(vertices.get(0),
-						vertices.get(vertices.size() - 1));
-				System.out.println(resultado);
-			}
-			if (caracteres[0].toLowerCase().equals("prim")) {
-				resultado = grafo.prim(caracteres[1]);
-				System.out.println(resultado);
-			}
-
-			linha = br.readLine();
-
-			if (linha == null)
-				break;
-		}
-
-	}
-
-	private void montaGrafo() throws IOException {
-		montaVertice();
-		linha = br.readLine();
-		// Verifica se o vertice é direcionado e se ele tem peso
-		if (linha.contains("true"))
-			ehDirecionado = true;
-		linha = br.readLine();
-		if (linha.contains("true"))
-			temPeso = true;
-
-		arrayAdj = montaArrayAdjacencia();
-
-		grafo = new Grafo(vertices, arrayAdj);
-
-	}
-
-	private int[][] montaArrayAdjacencia() throws IOException {
-		int tamArray = vertices.size();
-		arrayAdj = new int[tamArray][tamArray];
-
-		while (!linha.toLowerCase().equals("arestas")) {
-			linha = br.readLine();
-		}
-
-		while (!linha.equals("")) {
-
-			trataLinha(linha);
-
-			for (int i = 0; i < vertices.size(); i++) {
-				if (vertices.get(i).equals(caracteres[0])) {
-					for (int j = 0; j < vertices.size(); j++) {
-						if (caracteres[1].equals(Integer.toString(j))) {
-							setValorMat(i, j);
-						}
-
-					}
-					break;
-				}
-			}
-			linha = br.readLine();
-		}
-		return arrayAdj;
-
-	}
-
-	private void setValorMat(int i, int j) {
-		int valorMat = 0;
-		//Verifica se o grafo tem peso
-		if (temPeso == false)
-			valorMat = 1;
+		if(foiLido)
+			return linhasArquivo;
 		else
-			 valorMat = Integer.parseInt(caracteres[2]);
+			return null;
+	
+
+	}
+
+	private boolean leArquivo(FileInputStream arquivo) throws IOException {
+		linha = br.readLine();
 		
-		arrayAdj[i][j] = valorMat;
-		//verifica se o grafo é direcionado, caso não seja
-		//será necessario adicionar a conexão para ambos os vertices.
-		if (ehDirecionado == false)
-			arrayAdj[j][i] = valorMat;
-
-	}
-
-	private void montaVertice() throws IOException {
-
-		vertices = new ArrayList<String>();
-
-		String linha = br.readLine();
-		trataLinha(linha);
-
-		for (String caracter : caracteres) {
-			vertices.add(caracter);
+		linhasArquivo = new ArrayList<String>();
+		while(linha != null){
+			linhasArquivo.add(linha);
+			linha = br.readLine();
 		}
+		
+		return true;
 
-	}
-
-	private void trataLinha(String linha2) {
-
-		if (linha2.contains(";"))
-			linha2 = linha2.replaceAll(";", "");
-
-		linha2 = linha2.replaceAll(",", "");
-		caracteres = linha2.split(" ");
-
-	}
+	}	
 
 }

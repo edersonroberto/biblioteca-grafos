@@ -28,18 +28,18 @@ public class Grafo {
 		return null;
 	}
 	
-	public String buscaPorProfundidade(String origem, String alvo) {
+	public String buscaPorProfundidade(String origem, String destino) {
 
 		String verticeAtual = null;
 		List<String> lista = new ArrayList<String>();
-		String caminho = "";
+		String caminho = "Profundidade " + origem + " " + destino + ":\n" ;
 		Set<String> verticesVisitados = new HashSet<String>();
 		int cont = 1, qtdVerticesVizinhos = 0, qtdVerticesVizinhosAddLista = 0;
 
 		lista.add(origem);
 		verticeAtual = origem;
 
-		while (!verticeAtual.equals(alvo)) {
+		while (!verticeAtual.equals(destino)) {
 			verticesVisitados.add(verticeAtual);
 			caminho += verticeAtual + " foi visitado.\n";
 
@@ -75,7 +75,7 @@ public class Grafo {
 			cont++;
 		}
 
-		if (verticeAtual.equals(alvo)) {
+		if (verticeAtual.equals(destino)) {
 			caminho += verticeAtual + " foi visitado.";
 			caminho += "Destino " + verticeAtual + " foi encontrado.\n";
 		} else {
@@ -89,7 +89,7 @@ public class Grafo {
 
 		String verticeAtual = null;
 		List<String> lista = new ArrayList<String>();
-		String caminho = "";
+		String caminho = "Largura " + origem + " " + alvo + ":\n";
 		Set<String> verticesVisitados = new HashSet<String>();
 		int cont = 1, qtdVerticesVizinhos = 0;
 
@@ -144,7 +144,7 @@ public class Grafo {
 		HashMap<String, Integer> distancias = new HashMap<String, Integer>();
 		HashMap<String, String> anteriores = new HashMap<String, String>();
 		int distancia = 0;
-		String caminho = "";
+		String caminho = "Menor Caminho " + origem + " " + destino + ":\n";
 
 		// Percorre o vertice, coloca o na tabela de distancias e adiciona o
 		// vertice na lista de não visitados
@@ -166,10 +166,11 @@ public class Grafo {
 				if (verticeAtual.equals(vertices.get(i))) {
 					for (int j = 0; j < vertices.size(); j++) {
 						if (matAdj[i][j] != 0) {
-							if (naoVisitados.contains(vertices.get(j)))
+							if (naoVisitados.contains(vertices.get(j))){
 								verticesVizinhos.add(vertices.get(j));
-							distancia = distancias.get(verticeAtual)
-									+ matAdj[i][j];
+								distancia = distancias.get(verticeAtual)
+										+ matAdj[i][j];
+							}
 
 							if (distancia < distancias.get(vertices.get(j))) {
 								distancias.replace(vertices.get(j), distancia);
@@ -207,7 +208,8 @@ public class Grafo {
 	
 	public String prim(String origem){
 		Set<String> visitados = new HashSet<String>(); 
-		String verticeAtual = null, selecionado = "", caminho="";
+		String verticeAtual = null, selecionado = "";
+		String caminho="Prim " + origem + ":\n";
 		verticeAtual = origem;
 		int menorCusto = 999999, custo = 0;
 		

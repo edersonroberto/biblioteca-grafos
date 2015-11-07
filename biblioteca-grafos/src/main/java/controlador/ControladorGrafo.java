@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import utilitario.TrataLinha;
 import biblioteca.Grafo;
 
 public class ControladorGrafo {
@@ -24,10 +25,14 @@ public class ControladorGrafo {
 		// Verifica se o vertice é direcionado e se ele tem peso
 		if (linha.contains("true"))
 			ehDirecionado = true;
+		linhas.remove(0);
 		
 		if (linha.contains("true"))
 			temPeso = true;
-
+		
+		while(!linhas.get(0).equals("Arestas"))
+			linhas.remove(0);
+		
 		arrayAdj = montaArrayAdjacencia(linhas);
 
 		grafo = new Grafo(vertices, arrayAdj);
@@ -36,36 +41,31 @@ public class ControladorGrafo {
 	}
 
 	private void montaVertices(List<String> linhas){
-		
+		TrataLinha trataLinha = new TrataLinha();
 		vertices = new ArrayList<String>();
 		
 		linha = linhas.get(0);
 	
-		trataLinha(linha);
+		caracteres = trataLinha.trataLinha(linha);
 
 		for (String caracter : caracteres) {
 			vertices.add(caracter);
 		}
-		linhas.remove(linha);
+		linhas.remove(0);
 
 	}
 	
 	private int[][] montaArrayAdjacencia(List<String> linhas) {
+		TrataLinha trataLinha = new TrataLinha();
 		int tamArray = vertices.size();
 		arrayAdj = new int[tamArray][tamArray];
-
-		for(int i=0; i < linhas.size(); i++){
-			if(!linhas.get(i).equals("Arestas"))
-				linhas.remove(i);
-			else
-				break;
-		}
-		
-		linhas.remove("Arestas");
-		
-		for (String linha : linhas) {
-			trataLinha(linha);
-
+	
+		linhas.remove(0);
+			
+		while(!linhas.get(0).equals("")){	
+			linha = linhas.get(0);
+			caracteres = trataLinha.trataLinha(linha);
+			
 			for (int i = 0; i < vertices.size(); i++) {
 				if (vertices.get(i).equals(caracteres[0])) {
 					for (int j = 0; j < vertices.size(); j++) {
@@ -76,7 +76,9 @@ public class ControladorGrafo {
 					break;
 				}
 			}
+			linhas.remove(0);
 		}
+		
 		return arrayAdj;
 	}
 
@@ -96,14 +98,5 @@ public class ControladorGrafo {
 
 	}
 	
-	private void trataLinha(String linha2) {
-		//retira os caracteres do arquivo deixando somente os números 
-		if (linha2.contains(";"))
-			linha2 = linha2.replaceAll(";", "");
-
-		linha2 = linha2.replaceAll(",", "");
-		caracteres = linha2.split(" ");
-
-	}
 	
 }

@@ -1,4 +1,4 @@
-package biblioteca;
+package controlador;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import biblioteca.Grafo;
 
 public class ArquivoDeEntrada {
 
@@ -18,8 +20,8 @@ public class ArquivoDeEntrada {
 	private BufferedReader br;
 	private boolean temPeso;
 	private boolean ehDirecionado;
-	//private String origem;
-	//private String destino;
+	// private String origem;
+	// private String destino;
 	String linha = "";
 	String caracteres[] = {};
 
@@ -43,7 +45,7 @@ public class ArquivoDeEntrada {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally{
+		} finally {
 			br.close();
 		}
 
@@ -54,39 +56,46 @@ public class ArquivoDeEntrada {
 
 		montaGrafo();
 		linha = br.readLine();
-		
+
 		executaComandos();
 
 	}
 
 	private void executaComandos() throws IOException {
-		
+
 		String resultado = "";
-		while(!(linha.equals(""))){
+		while (!(linha.equals(""))) {
 			trataLinha(linha);
-			
-			if (caracteres[0].toLowerCase().contains("distancia")){
-				//executa metodo para descobrir a distancia
+
+			if (caracteres[0].toLowerCase().contains("distancia")) {
+				// executa metodo para descobrir a distancia
 			}
-			if (caracteres[0].toLowerCase().equals("profundidade")){
-				resultado = grafo.buscaPorProfundidade(vertices.get(0), vertices.get(vertices.size()-1));
+			if (caracteres[0].toLowerCase().equals("profundidade")) {
+				resultado = grafo.buscaPorProfundidade(vertices.get(0),
+						vertices.get(vertices.size() - 1));
 				System.out.println(resultado);
 			}
-			if (caracteres[0].toLowerCase().equals("largura")){
-				resultado = grafo.buscaPorLargura(vertices.get(0), vertices.get(vertices.size()-1));
+			if (caracteres[0].toLowerCase().equals("largura")) {
+				resultado = grafo.buscaPorLargura(vertices.get(0),
+						vertices.get(vertices.size() - 1));
 				System.out.println(resultado);
 			}
-			if (caracteres[0].toLowerCase().equals("menor")){
-				resultado = grafo.Dijkstra(vertices.get(0), vertices.get(vertices.size()-1));
+			if (caracteres[0].toLowerCase().equals("menor")) {
+				resultado = grafo.Dijkstra(vertices.get(0),
+						vertices.get(vertices.size() - 1));
 				System.out.println(resultado);
 			}
-			
+			if (caracteres[0].toLowerCase().equals("prim")) {
+				resultado = grafo.prim(caracteres[1]);
+				System.out.println(resultado);
+			}
+
 			linha = br.readLine();
-			
+
 			if (linha == null)
 				break;
 		}
-		
+
 	}
 
 	private void montaGrafo() throws IOException {
@@ -100,8 +109,8 @@ public class ArquivoDeEntrada {
 			temPeso = true;
 
 		arrayAdj = montaArrayAdjacencia();
-		
-		grafo = new Grafo (vertices, arrayAdj);
+
+		grafo = new Grafo(vertices, arrayAdj);
 
 	}
 
@@ -112,20 +121,18 @@ public class ArquivoDeEntrada {
 		while (!linha.toLowerCase().equals("arestas")) {
 			linha = br.readLine();
 		}
-	
+
 		while (!linha.equals("")) {
-			
+
 			trataLinha(linha);
-			
+
 			for (int i = 0; i < vertices.size(); i++) {
- 				if (vertices.get(i).equals(caracteres[0])) {
+				if (vertices.get(i).equals(caracteres[0])) {
 					for (int j = 0; j < vertices.size(); j++) {
 						if (caracteres[1].equals(Integer.toString(j))) {
-							if(temPeso == false)
-								arrayAdj[i][j] = 1;
-							else
-								arrayAdj[i][j] = Integer.parseInt(caracteres[2]);
+							setValorMat(i, j);
 						}
+
 					}
 					break;
 				}
@@ -136,29 +143,43 @@ public class ArquivoDeEntrada {
 
 	}
 
-	private void montaVertice() throws IOException {
-	
-		vertices = new ArrayList<String>();
+	private void setValorMat(int i, int j) {
+		int valorMat = 0;
+		//Verifica se o grafo tem peso
+		if (temPeso == false)
+			valorMat = 1;
+		else
+			 valorMat = Integer.parseInt(caracteres[2]);
 		
+		arrayAdj[i][j] = valorMat;
+		//verifica se o grafo é direcionado, caso não seja
+		//será necessario adicionar a conexão para ambos os vertices.
+		if (ehDirecionado == false)
+			arrayAdj[j][i] = valorMat;
+
+	}
+
+	private void montaVertice() throws IOException {
+
+		vertices = new ArrayList<String>();
+
 		String linha = br.readLine();
 		trataLinha(linha);
 
 		for (String caracter : caracteres) {
 			vertices.add(caracter);
 		}
-		
-		
+
 	}
-	
+
 	private void trataLinha(String linha2) {
 
-		if(linha2.contains(";"))
+		if (linha2.contains(";"))
 			linha2 = linha2.replaceAll(";", "");
-		
+
 		linha2 = linha2.replaceAll(",", "");
 		caracteres = linha2.split(" ");
-		
+
 	}
-	
-	
+
 }

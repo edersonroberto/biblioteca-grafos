@@ -12,13 +12,14 @@ public class TestaMenorCaminho {
 	public void criaGrafo(){
 		
 		GrafoParaTeste grafoTeste = new GrafoParaTeste();
-		grafo = grafoTeste.criaGrafoSimples();
+		grafo = grafoTeste.criaGrafoPonderado();
 		
 	}
 	
 	@Test
 	public void testeMenorCaminho(){
-		String esperado = "0 1 2 3 \n2";
+		String esperado = "Menor Caminho 0 3:\n"
+				+"0 1 3 \n16";
 		assertEquals(esperado, grafo.Dijkstra("0", "3"));
 		
 	}

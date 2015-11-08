@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utilitario.TrataLinha;
+import biblioteca.Aresta;
 import biblioteca.Grafo;
 
 public class ControladorGrafo {
@@ -13,10 +14,17 @@ public class ControladorGrafo {
 	private boolean temPeso;
 	private Grafo grafo;
 	private List<String> vertices;
+	private List<Aresta> arestas;
+	private Aresta aresta;
 	private int[][] arrayAdj;
 	private String[] caracteres;
+	
 
 	public Grafo montaGrafo(List<String> linhas) {
+		
+		vertices = new ArrayList<String>();
+		arestas = new ArrayList<Aresta>();
+
 		
 		linhas.remove("Grafo");
 		montaVertices(linhas);
@@ -35,14 +43,14 @@ public class ControladorGrafo {
 		
 		arrayAdj = montaArrayAdjacencia(linhas);
 
-		grafo = new Grafo(vertices, arrayAdj);
+		grafo = new Grafo(vertices, arrayAdj, arestas);
 
 		return grafo;
 	}
 
 	private void montaVertices(List<String> linhas){
 		TrataLinha trataLinha = new TrataLinha();
-		vertices = new ArrayList<String>();
+		
 		
 		linha = linhas.get(0);
 	
@@ -61,10 +69,14 @@ public class ControladorGrafo {
 		arrayAdj = new int[tamArray][tamArray];
 	
 		linhas.remove(0);
-			
+		
+		
+		
 		while(!linhas.get(0).equals("")){	
 			linha = linhas.get(0);
 			caracteres = trataLinha.trataLinha(linha);
+			
+			montaArestas();
 			
 			for (int i = 0; i < vertices.size(); i++) {
 				if (vertices.get(i).equals(caracteres[0])) {
@@ -80,6 +92,14 @@ public class ControladorGrafo {
 		}
 		
 		return arrayAdj;
+	}
+
+	private void montaArestas() {
+		
+		aresta = new Aresta(caracteres[0], caracteres[1], Integer.parseInt(caracteres[2]));
+		arestas.add(aresta);
+		
+		
 	}
 
 	private void setValorMat(int i, int j) {

@@ -28,22 +28,29 @@ public class ControladorDeComandos {
 		String comando = caracteres[0].toLowerCase();
 
 		switch (comando) {
-		case "distancia":
-		
-			break;
-		case "profuncidade":
-			resultado = grafo.buscaPorProfundidade(caracteres[1], caracteres[2]);
-			break;
-		case "largura":
-			resultado = grafo.buscaPorLargura(caracteres[1], caracteres[2]);
-			break;
-		case "menor":
-			resultado = grafo.Dijkstra(caracteres[2], caracteres[3]);
-			break;
-		case "prim":
-			resultado = grafo.prim(caracteres[1]);
-			break;
+			case "distancia":
+				
+				break;
+			case "profundidade":
+				resultado = grafo.buscaPorProfundidade(caracteres[1], caracteres[2]);
+				break;
+			case "largura":
+				resultado = grafo.buscaPorLargura(caracteres[1], caracteres[2]);
+				break;
+			case "menor":
+				resultado = grafo.Dijkstra(caracteres[2], caracteres[3]);
+				break;
+			case "prim":
+				resultado = grafo.prim(caracteres[1]);
+				break;
+			case "kruskal":
+				resultado = grafo.kruskal();
+				break;
+			default:
+				return;
+			
 		}
+		
 		System.out.println(resultado);
 		
 	}

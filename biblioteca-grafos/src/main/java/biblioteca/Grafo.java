@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 public class Grafo {
 
 	private List<String> vertices;
@@ -178,50 +180,93 @@ public class Grafo {
 
 			naoVisitados.remove(verticeAtual);
 
-			for (int i = 0; i < vertices.size(); i++) {
-				if (verticeAtual.equals(vertices.get(i))) {
-					for (int j = 0; j < vertices.size(); j++) {
-						if (matAdj[i][j] != 0) {
-							if (naoVisitados.contains(vertices.get(j))) {
-								verticesVizinhos.add(vertices.get(j));
-								distancia = distancias.get(verticeAtual)
-										+ matAdj[i][j];
-							}
+			distancia += calculaDistancia(verticeAtual, naoVisitados, verticesVizinhos,
+					distancias, anteriores, distancia);
 
-							if (distancia < distancias.get(vertices.get(j))) {
-								distancias.replace(vertices.get(j), distancia);
-								anteriores.replace(vertices.get(j),
-										verticeAtual);
-							}
-						}
-					}
-				}
-			}
-
-			caminho += verticeAtual + " ";
-			if (verticesVizinhos.size() == 0) {
-				break;
-			} else if (verticesVizinhos.size() == 1) {
-				verticeAtual = verticesVizinhos.get(0);
-			} else {
-				verticeAtual = verticesVizinhos.get(0);
-				for (int i = 0; i <= verticesVizinhos.size() - 2; i++) {
-					if (distancias.get(verticeAtual) > distancias
-							.get(verticesVizinhos.get(i + 1)))
-						verticeAtual = verticesVizinhos.get(i + 1);
-				}
-			}
+			verticeAtual = defineVerticeAtual(verticesVizinhos, distancias); 
 			verticesVizinhos.removeAll(verticesVizinhos);
 		}
-
-		if (anteriores.get(destino) != null) {
-			caminho += "\n" + distancias.get(destino);
-		} else
-			caminho += "\nCaminho não encontrado!";
+		
+		caminho += defineMenorCaminho(anteriores, distancias, destino, origem);
+		
 
 		return caminho;
 	}
 
+	private String defineMenorCaminho(HashMap<String,String> anteriores, 
+			HashMap<String,Integer> distancias, String destino, String origem) {
+		
+		String vertice = "", rota = "";
+		int distancia = 0;
+		
+		if (anteriores.get(destino) != null) {
+			rota = destino;
+			vertice = anteriores.get(destino);
+			if(vertice.equals(origem)){
+				rota = vertice + " " + rota;
+				distancia = distancias.get(destino); 
+			}else{
+				while(!vertice.equals(origem)){
+					rota = vertice + " " + rota;
+					distancia += distancias.get(vertice);
+					vertice = anteriores.get(vertice);
+				}
+			}
+		} else{
+			rota += "\nCaminho não encontrado!";
+		}
+		rota = origem + " " + rota;
+		rota += "\n" + distancia;
+		
+		return rota;
+	}
+
+	private String defineVerticeAtual(List<String> verticesVizinhos, HashMap<String, Integer> distancias) {
+		String vertice = "";
+		
+		if (verticesVizinhos.size() == 1) {
+			vertice = verticesVizinhos.get(0);
+		} else if(verticesVizinhos.size() > 1 ){
+			vertice = verticesVizinhos.get(0);
+			for (int i = 0; i <= verticesVizinhos.size() - 2; i++) {
+				if (distancias.get(vertice) > distancias
+						.get(verticesVizinhos.get(i + 1)))
+					vertice = verticesVizinhos.get(i + 1);
+			}
+		}
+		return vertice;
+	}
+
+	private int calculaDistancia(String verticeAtual, List<String> naoVisitados,
+			List<String> verticesVizinhos, HashMap<String, Integer> distancias,
+			HashMap<String, String> anteriores, int distancia) {
+		for (int i = 0; i < vertices.size(); i++) {
+			if (verticeAtual.equals(vertices.get(i))) {
+				for (int j = 0; j < vertices.size(); j++) {
+					if (matAdj[i][j] != 0) {
+						if (naoVisitados.contains(vertices.get(j))) {
+							verticesVizinhos.add(vertices.get(j));
+							distancia = distancias.get(verticeAtual)
+									+ matAdj[i][j];
+						}
+
+						if (distancia < distancias.get(vertices.get(j))) {
+							distancias.replace(vertices.get(j), distancia);
+							anteriores.replace(vertices.get(j),
+									verticeAtual);
+						}
+					}
+				}
+			}
+		}
+		return distancia;
+	}
+	
+	/**
+	 * 
+	 * @param origem
+	 * @return
+	 */
 	public String prim(String origem) {
 		Set<String> visitados = new HashSet<String>();
 		String verticeAtual = null, selecionado = "";

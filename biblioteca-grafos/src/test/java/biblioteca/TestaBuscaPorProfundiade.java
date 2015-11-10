@@ -36,11 +36,11 @@ public class TestaBuscaPorProfundiade {
 		
 		String resultado = "";
 		String esperado = "Profundidade 0 4:\n"
-				+ "0 foi visitado.\n1 2 são vizinhos de 0.\n1 foi visitado.\n"
+						+ "0 foi visitado.\n1 2 são vizinhos de 0.\n1 foi visitado.\n"
 						+ "0 2 são vizinhos de 1.\n2 foi visitado.\n"
 						+ "0 1 3 são vizinhos de 2.\n"
-						+ "3 foi visitado.\n2 é vizinho de 3."
-						+ "\nDestino não encontrado.\n";
+						+ "3 foi visitado.\n2 4 são vizinhos de 3.\n"
+						+"4 foi visitado.\nDestino 4 foi encontrado.\n";
 		
 		resultado = grafo.buscaPorProfundidade("0", "4");
 		assertEquals(esperado, resultado);

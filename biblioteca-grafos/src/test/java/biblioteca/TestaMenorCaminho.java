@@ -26,7 +26,7 @@ public class TestaMenorCaminho {
 		
 	}
 	
-	@Ignore
+	
 	@Test
 	public void testeMenorCaminhoOrdemInversa(){
 		String esperado = "Menor Caminho 3 2:\n"
@@ -34,7 +34,7 @@ public class TestaMenorCaminho {
 		assertEquals(esperado, grafo.Dijkstra("3", "2"));
 	
 	}
-	@Ignore
+	
 	@Test
 	public void testeMenorCaminhoDestinoInesistente(){
 		String esperado = "3 2 0 1 \nCaminho não encontrado!";

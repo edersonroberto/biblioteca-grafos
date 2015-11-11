@@ -65,7 +65,7 @@ public class GrafoParaTeste {
 	public Grafo criaGrafoPonderado(){
 		this.inicializaVertices("0", "1", "2", "3", "4");
 		this.inicializaListaVertices();
-		int matAdjAux[][] ={{0,10,0,12,0},{10,0,0,6,0},{0,0,0,9,15,0},{12,6,9,0,0},{0,0,15,0,0}}; 
+		int matAdjAux[][] ={{0,10,0,12,0},{10,0,0,6,0},{0,0,0,9,15},{12,6,9,0,0},{0,0,15,0,0}}; 
 		this.matAdj = matAdjAux;
 		
 		this.inicializaAresta();

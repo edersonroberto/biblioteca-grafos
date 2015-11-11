@@ -34,14 +34,23 @@ public class TestaBuscaPorLargura {
 	public void TesteBuscaPorLarguraOrigemNaoExisteNoGrafo(){
 				
 		String resultado = "";
-		String esperado = "Largura A E:\n"
-				+ "A foi visitado.\nB C são vizinhos de A.\n"
-				+ "B foi visitado.\nA C são vizinhos de B.\n"
-				+ "C foi visitado.\nA B D são vizinhos de C.\n"
-				+ "D foi visitado.\nC é vizinho de D.\n"
-				+ "Destino não encontrado.";
-		
-		resultado = grafo.buscaPorLargura("A", "E");
+		String esperado = "Largura F A:\n"
+						+ "Não foi possivél executar operação.\n"
+						+ "Origem não existe no grafo.\n";
+				
+		resultado = grafo.buscaPorLargura("F", "A");
+		assertEquals(esperado, resultado);
+	}
+	
+	@Test
+	public void TesteBuscaPorLarguraDestinoNaoExisteNoGrafo(){
+				
+		String resultado = "";
+		String esperado = "Largura A F:\n"
+						+ "Não foi possivél executar operação.\n"
+						+ "Destino não existe no grafo.\n";
+				
+		resultado = grafo.buscaPorLargura("A", "F");
 		assertEquals(esperado, resultado);
 	}
 	
@@ -50,8 +59,9 @@ public class TestaBuscaPorLargura {
 	public void testeBuscaPorProfundidadeOrdemInversa(){
 		
 		String esperado = "Largura D A:\n"
-				+ "D foi visitado.\nC é vizinho de D.\n"
+				+ "D foi visitado.\nC E são vizinhos de D.\n"
 				+ "C foi visitado.\nA B D são vizinhos de C.\n"
+				+ "E foi visitado.\nD é vizinho de E.\n"
 				+ "A foi visitado.\nDestino A foi encontrado.\n";
 		
 		String resultado = grafo.buscaPorLargura("D", "A");

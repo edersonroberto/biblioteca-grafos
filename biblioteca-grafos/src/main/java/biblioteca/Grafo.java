@@ -104,93 +104,120 @@ public class Grafo {
 
 	}
 
-	public String buscaPorLargura(String origem, String alvo) {
+	public String buscaPorLargura(String origem, String destino) {
+		
+		String caminho = "Largura " + origem + " " + destino + ":\n";
+		String retornoOperacao = validaOperacao(origem, destino);
+		
+		if(retornoOperacao == null){
+			String verticeAtual = "";
+			List<String> lista = new ArrayList<String>();
+			
+			Set<String> verticesVisitados = new HashSet<String>();
+			int cont = 1, qtdVerticesVizinhos = 0;
 
-		String verticeAtual = "";
-		List<String> lista = new ArrayList<String>();
-		String caminho = "Largura " + origem + " " + alvo + ":\n";
-		Set<String> verticesVisitados = new HashSet<String>();
-		int cont = 1, qtdVerticesVizinhos = 0;
+			lista.add(origem);
+			verticeAtual = origem;
 
-		lista.add(origem);
-		verticeAtual = origem;
+			while (!verticeAtual.equals(destino) && !(verticesVisitados.size() == vertices.size())) {
+				verticesVisitados.add(verticeAtual);
+				caminho += verticeAtual + " foi visitado.\n";
 
-		while (!verticeAtual.equals(alvo) && !(verticesVisitados.size() == vertices.size())) {
-			verticesVisitados.add(verticeAtual);
-			caminho += verticeAtual + " foi visitado.\n";
-
-			for (int i = 0; i < vertices.size(); i++) {
-				if (verticeAtual.equals(vertices.get(i))) {
-					for (int j = 0; j < vertices.size(); j++) {
-						if (matAdj[i][j] != 0) {
-							caminho += vertices.get(j) + " ";
-							qtdVerticesVizinhos++;
-							if(!lista.contains(vertices.get(j)))
-								lista.add(vertices.get(j));
+				for (int i = 0; i < vertices.size(); i++) {
+					if (verticeAtual.equals(vertices.get(i))) {
+						for (int j = 0; j < vertices.size(); j++) {
+							if (matAdj[i][j] != 0) {
+								caminho += vertices.get(j) + " ";
+								qtdVerticesVizinhos++;
+								if(!lista.contains(vertices.get(j)))
+									lista.add(vertices.get(j));
+							}
 						}
 					}
 				}
+				if (qtdVerticesVizinhos == 1) {
+					caminho += "é vizinho de " + verticeAtual + ".\n";
+				} else if (qtdVerticesVizinhos > 1) {
+					caminho += "são vizinhos de " + verticeAtual + ".\n";
+				}
+				if (cont >= vertices.size())
+					break;
+				
+				qtdVerticesVizinhos = 0;
+				verticeAtual = lista.get(cont);
+				cont++;
 			}
-			if (qtdVerticesVizinhos == 1) {
-				caminho += "é vizinho de " + verticeAtual + ".\n";
-			} else if (qtdVerticesVizinhos > 1) {
-				caminho += "são vizinhos de " + verticeAtual + ".\n";
-			}
-			if (cont >= vertices.size())
-				break;
-			
-			qtdVerticesVizinhos = 0;
-			verticeAtual = lista.get(cont);
-			cont++;
-		}
 
-		if (verticeAtual.equals(alvo)) {
-			caminho += verticeAtual + " foi visitado.\n";
-			caminho += "Destino " + verticeAtual + " foi encontrado.\n";
-		} else {
-			caminho += "Destino não encontrado.";
+			if (verticeAtual.equals(destino)) {
+				caminho += verticeAtual + " foi visitado.\n";
+				caminho += "Destino " + verticeAtual + " foi encontrado.\n";
+			} else {
+				caminho += "Destino não encontrado.";
+			}
+		}else{
+			caminho += "Não foi possivél executar operação.\n";
+			caminho += retornoOperacao;
 		}
+		
 		return caminho;
 
 	}
 
 	public String Dijkstra(String origem, String destino) {
-
-		String verticeAtual = null;
-		List<String> naoVisitados = new ArrayList<String>();
-		List<String> verticesVizinhos = new ArrayList<String>();
-		HashMap<String, Integer> distancias = new HashMap<String, Integer>();
-		HashMap<String, String> anteriores = new HashMap<String, String>();
-		int distancia = 0;
+		
 		String caminho = "Menor Caminho " + origem + " " + destino + ":\n";
-
-		// Percorre o vertice, coloca o na tabela de distancias e adiciona o
-		// vertice na lista de não visitados
-		for (String vertice : vertices) {
-			distancias.put(vertice, 2147483647);
-			naoVisitados.add(vertice);
-			anteriores.put(vertice, null);
-		}
-
-		verticeAtual = origem;
-		distancias.replace(verticeAtual, 0);
-
-		// Faz um loop até que a lista de não visitados esteja vazia
-		while (!verticeAtual.equals(destino) && !naoVisitados.isEmpty()) {
-
-			naoVisitados.remove(verticeAtual);
-
-			distancia += calculaDistancia(verticeAtual, naoVisitados, verticesVizinhos,
-					distancias, anteriores, distancia);
-
-			verticeAtual = defineVerticeAtual(verticesVizinhos, distancias); 
-			verticesVizinhos.removeAll(verticesVizinhos);
-		}
+		String retornoOperacao = validaOperacao(origem, destino);
 		
-		caminho += defineMenorCaminho(anteriores, distancias, destino, origem);
+		if(retornoOperacao == null){
 		
-
+			String verticeAtual = null;
+			List<String> naoVisitados = new ArrayList<String>();
+			List<String> verticesVizinhos = new ArrayList<String>();
+			HashMap<String, Integer> distancias = new HashMap<String, Integer>();
+			HashMap<String, String> anteriores = new HashMap<String, String>();
+			int distancia = 0;
+			
+	
+			// Percorre o vertice, coloca o na tabela de distancias e adiciona o
+			// vertice na lista de não visitados
+			for (String vertice : vertices) {
+				distancias.put(vertice, 2147483647);
+				naoVisitados.add(vertice);
+				anteriores.put(vertice, null);
+			}
+	
+			verticeAtual = origem;
+			distancias.replace(verticeAtual, 0);
+	
+			// Faz um loop até que a lista de não visitados esteja vazia
+			while (!verticeAtual.equals(destino) && !naoVisitados.isEmpty()) {
+	
+				naoVisitados.remove(verticeAtual);
+				//TO DO variavel distancia não é necessaria aki
+				distancia += calculaDistancia(verticeAtual, naoVisitados, verticesVizinhos,
+						distancias, anteriores, distancia);
+	
+				verticeAtual = defineVerticeAtual(verticesVizinhos, distancias); 
+				verticesVizinhos.removeAll(verticesVizinhos);
+			}
+			
+			caminho += defineMenorCaminho(anteriores, distancias, destino, origem);
+	}else{
+		caminho += "Não foi possivél realizar operação.\n";
+		caminho += retornoOperacao;
+	}
 		return caminho;
+	}
+
+	private String validaOperacao(String origem, String destino) {
+		
+		if(!vertices.contains(origem)){
+			return "Origem não existe no grafo.\n";
+		}else if (!vertices.contains(destino)){
+			return "Destino não existe no grafo.\n";
+		}
+		
+		return null;
 	}
 
 	private String defineMenorCaminho(HashMap<String,String> anteriores, 
@@ -198,7 +225,6 @@ public class Grafo {
 		
 		String vertice = "", rota = "";
 		int distancia = 0;
-		
 		if (anteriores.get(destino) != null) {
 			rota = destino;
 			vertice = anteriores.get(destino);
@@ -208,7 +234,7 @@ public class Grafo {
 			}else{
 				while(!vertice.equals(origem)){
 					rota = vertice + " " + rota;
-					distancia += distancias.get(vertice);
+					
 					vertice = anteriores.get(vertice);
 				}
 			}
@@ -216,7 +242,7 @@ public class Grafo {
 			rota += "\nCaminho não encontrado!";
 		}
 		rota = origem + " " + rota;
-		rota += "\n" + distancia;
+		rota += "\n" + distancias.get(destino);
 		
 		return rota;
 	}
@@ -240,6 +266,7 @@ public class Grafo {
 	private int calculaDistancia(String verticeAtual, List<String> naoVisitados,
 			List<String> verticesVizinhos, HashMap<String, Integer> distancias,
 			HashMap<String, String> anteriores, int distancia) {
+		
 		for (int i = 0; i < vertices.size(); i++) {
 			if (verticeAtual.equals(vertices.get(i))) {
 				for (int j = 0; j < vertices.size(); j++) {

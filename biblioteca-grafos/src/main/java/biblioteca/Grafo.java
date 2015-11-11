@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 public class Grafo {
 
 	private List<String> vertices;
@@ -20,6 +18,7 @@ public class Grafo {
 		this.matAdj = matAdj;
 		this.arestas = arestas;
 	}
+	
 
 	public String distancia(String[] caminho) {
 
@@ -206,7 +205,7 @@ public class Grafo {
 		caminho += "Não foi possivél realizar operação.\n";
 		caminho += retornoOperacao;
 	}
-		return caminho;
+		return caminho + "\n";
 	}
 
 	private String validaOperacao(String origem, String destino) {
@@ -289,11 +288,6 @@ public class Grafo {
 		return distancia;
 	}
 	
-	/**
-	 * 
-	 * @param origem
-	 * @return
-	 */
 	public String prim(String origem) {
 		Set<String> visitados = new HashSet<String>();
 		String verticeAtual = null, selecionado = "";
@@ -328,7 +322,7 @@ public class Grafo {
 			menorCusto = 999999;
 			visitados.add(verticeAtual);
 		}
-		caminho += custo;
+		caminho += custo + "\n";
 
 		return caminho;
 
@@ -336,7 +330,7 @@ public class Grafo {
 
 	public String kruskal() {
 		Aresta aresta = new Aresta();
-		String caminho = "";
+		String caminho = "Kruskal:\n";
 		
 		List<Aresta> floresta = new ArrayList<Aresta>();
 		/*
@@ -366,7 +360,7 @@ public class Grafo {
 			custo += f.getPeso();
 			caminho+= f.getOrigem() + " " + f.getDestino() + " " + f.getPeso() + ",\n" ;
 		}
-		caminho+= custo;
+		caminho+= custo + "\n";
 		
 		return caminho;
 	}

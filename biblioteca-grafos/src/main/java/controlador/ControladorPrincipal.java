@@ -1,5 +1,7 @@
 package controlador;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import utilitario.ArquivoDeEntrada;
@@ -8,22 +10,37 @@ import biblioteca.Grafo;
 public class ControladorPrincipal {
 	
 	private Grafo grafo;
+	List<String> linhas ;
+	ArquivoDeEntrada arqEntrada;
 	
 	public boolean controlaFluxo(){
-	
-		List<String> linhas ; 
-		
-		ArquivoDeEntrada arqEntrada = new ArquivoDeEntrada();
-		linhas = arqEntrada.trataArquivoDeEntrada("arquivo.txt");
-		
 		
 		ControladorGrafo controlarGrafo = new ControladorGrafo();
-		grafo = controlarGrafo.montaGrafo(linhas);
-		
 		ControladorDeComandos controladorDeComandos = new ControladorDeComandos();
-		controladorDeComandos.executaComandos(grafo, linhas);
+		linhas = leArquivoDeEntrada();
 		
-		return true;
+		if(linhas != null){
+			
+			grafo = controlarGrafo.montaGrafo(linhas);
+			controladorDeComandos.executaComandos(grafo, linhas);
+			return true;
+		}
+		
+		return false;
+	}
+
+	private List<String> leArquivoDeEntrada() {
+		
+		arqEntrada = new ArquivoDeEntrada();
+		linhas = new ArrayList<String>();
+		
+		try {
+			linhas = arqEntrada.trataArquivoDeEntrada("arquivo.txt");
+		} catch (IOException e) {
+			System.out.println("Falha ao ler arquivo " + e.getMessage());
+		}
+		
+		return linhas;
 	}
 	
 }

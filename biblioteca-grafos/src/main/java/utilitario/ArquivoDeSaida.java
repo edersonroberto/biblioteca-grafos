@@ -19,7 +19,6 @@ public class ArquivoDeSaida {
 	
 	public boolean gravaArquivoDeSaida(String resultado){
 		
-		
 		FileOutputStream os;
 		OutputStreamWriter sw;
 		BufferedWriter bw;
@@ -30,9 +29,6 @@ public class ArquivoDeSaida {
 			bw = new BufferedWriter(sw);
 			
 			bw.append(resultado);
-			//bw.write(resultado);
-			//bw.flush();
-			//bw.newLine();
 			bw.close();
 			
 		}catch(IOException e){

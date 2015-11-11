@@ -3,7 +3,6 @@ package biblioteca;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestaBuscaPorProfundiade {
@@ -46,13 +45,17 @@ public class TestaBuscaPorProfundiade {
 		assertEquals(esperado, resultado);
 	}
 	
-	@Ignore
 	@Test
 	public void testeBuscaPorProfundidadeOrdemInversa(){
 		
-		String resultado = "";
+		String esperado =  "Profundidade 4 0:\n"
+				+ "4 foi visitado.\n3 é vizinho de 4.\n3 foi visitado.\n"
+				+ "2 4 são vizinhos de 3.\n2 foi visitado.\n"
+				+ "0 1 3 são vizinhos de 2.\n"
+				+"0 foi visitado.\nDestino 0 foi encontrado.\n";
 		
-		resultado = grafo.buscaPorProfundidade("3", "0");
-		System.out.println(resultado);
+		assertEquals(esperado, grafo.buscaPorProfundidade("4", "0"));
+		
+		
 	}
 }

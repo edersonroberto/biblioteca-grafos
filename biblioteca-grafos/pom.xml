@@ -45,6 +45,14 @@
   		<version>2.2.10</version>
   		<scope>compile</scope>
   	</dependency>
+  	
+  	<!--  biblioteca hamcrest para testes unitários -->
+  	<dependency>
+		<groupId>org.hamcrest</groupId>
+		<artifactId>hamcrest-all</artifactId>
+		<version>1.3</version>
+	</dependency>
+  	
   </dependencies>
 
   

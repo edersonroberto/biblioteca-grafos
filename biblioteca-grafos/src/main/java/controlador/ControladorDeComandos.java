@@ -2,18 +2,22 @@ package controlador;
 
 import java.util.List;
 
+import utilitario.ArquivoDeSaida;
 import utilitario.TrataLinha;
 import biblioteca.Grafo;
 
 public class ControladorDeComandos {
 
 	private Grafo grafo;
+	ArquivoDeSaida arquivoSaida;
 
 	public void executaComandos(Grafo grafo, List<String> linhas) {
+		arquivoSaida = new ArquivoDeSaida("saida");
 		String caracteres[];
 		this.grafo = grafo;
 		TrataLinha trataLinha = new TrataLinha();
 		linhas.remove("Comandos");
+		
 
 		for (String linha : linhas) {
 			caracteres = trataLinha.trataLinha(linha);
@@ -51,7 +55,7 @@ public class ControladorDeComandos {
 			
 		}
 		
-		System.out.println(resultado);
+		arquivoSaida.gravaArquivoDeSaida(resultado);
 		
 	}
 

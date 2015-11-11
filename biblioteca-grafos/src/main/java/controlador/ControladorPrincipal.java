@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.List;
 
+import utilitario.ArquivoDeEntrada;
 import biblioteca.Grafo;
 
 public class ControladorPrincipal {

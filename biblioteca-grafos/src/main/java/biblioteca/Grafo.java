@@ -205,7 +205,7 @@ public class Grafo {
 		caminho += "Não foi possivél realizar operação.\n";
 		caminho += retornoOperacao;
 	}
-		return caminho + "\n";
+		return caminho;
 	}
 
 	private String validaOperacao(String origem, String destino) {

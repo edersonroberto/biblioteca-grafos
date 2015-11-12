@@ -37,12 +37,16 @@ public class ArquivoDeEntrada {
 		linha = br.readLine();
 
 		linhasArquivo = new ArrayList<String>();
-		while (linha != null) {
-			linhasArquivo.add(linha);
-			linha = br.readLine();
+		
+		if(linha != null){
+			while (linha != null) {
+				linhasArquivo.add(linha);
+				linha = br.readLine();
+			}
+			return true;
 		}
 
-		return true;
+		return false;
 
 	}
 

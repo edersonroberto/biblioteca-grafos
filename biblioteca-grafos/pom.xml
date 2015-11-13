@@ -14,13 +14,25 @@
   	<plugins>
   		<plugin>
   			<artifactId>maven-compiler-plugin</artifactId>
-  			<version>3.0</version>
+  			<version>3.1</version>
   			<configuration>
   			<!--  Define qual versão do java será usada para compilar o projeto-->
   				<source>1.8</source>
   				<target>1.8</target>
   			</configuration>
   		</plugin>
+  		<!-- Adicionado o ApacheTomcat como puglin -->
+  		<plugin>
+  			<groupId>org.apache.tomcat.maven</groupId>
+  			<artifactId>tomcat7-maven-plugin</artifactId>
+  			<version>2.3-SNAPSHOT</version>
+  			<configuration>
+  				<path>${project.build.finalName}</path>
+  				<port>8080</port>
+  				<url>http://localhost:8080/biblioteca-grafos/index.xhtml</url>
+  			</configuration>
+  		</plugin>
+  		
   	</plugins>
   </build>
   
@@ -33,6 +45,14 @@
   		<version>2.2.10</version>
   		<scope>compile</scope>
   	</dependency>
+  	
+  	<!--  biblioteca hamcrest para testes unitários -->
+  	<dependency>
+		<groupId>org.hamcrest</groupId>
+		<artifactId>hamcrest-all</artifactId>
+		<version>1.3</version>
+	</dependency>
+  	
   </dependencies>
 
   

@@ -8,13 +8,12 @@ import org.junit.Test;
 public class TestaBuscaPorLargura {
 	
 	private Grafo grafo;
-
+	private Busca busca;
 	@Before
 	public void criaGrafo(){
 		
-		GrafoParaTeste grafoTeste = new GrafoParaTeste();
-		grafo = grafoTeste.criaGrafoRotulado();
-
+		grafo = GrafoParaTeste.criaGrafoRotulado();
+		busca = new Busca();
 	}
 
 	@Test
@@ -26,7 +25,7 @@ public class TestaBuscaPorLargura {
 				+ "C foi visitado.\nA B D são vizinhos de C.\n"
 				+ "D foi visitado.\nDestino D foi encontrado.\n";
 		
-		resultado = grafo.buscaPorLargura("A", "D");
+		resultado = busca.buscaPorLargura(grafo, "A", "D");
 		assertEquals(esperado, resultado);
 	}
 	
@@ -38,7 +37,7 @@ public class TestaBuscaPorLargura {
 						+ "Não foi possivél executar operação.\n"
 						+ "Origem não existe no grafo.\n";
 				
-		resultado = grafo.buscaPorLargura("F", "A");
+		resultado = busca.buscaPorLargura(grafo, "F", "A");
 		assertEquals(esperado, resultado);
 	}
 	
@@ -50,7 +49,7 @@ public class TestaBuscaPorLargura {
 						+ "Não foi possivél executar operação.\n"
 						+ "Destino não existe no grafo.\n";
 				
-		resultado = grafo.buscaPorLargura("A", "F");
+		resultado = busca.buscaPorLargura(grafo, "A", "F");
 		assertEquals(esperado, resultado);
 	}
 	
@@ -64,7 +63,7 @@ public class TestaBuscaPorLargura {
 				+ "E foi visitado.\nD é vizinho de E.\n"
 				+ "A foi visitado.\nDestino A foi encontrado.\n";
 		
-		String resultado = grafo.buscaPorLargura("D", "A");
+		String resultado = busca.buscaPorLargura(grafo, "D", "A");
 		assertEquals(esperado, resultado);
 		
 	}

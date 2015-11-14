@@ -5,18 +5,21 @@ import java.util.List;
 
 public class GrafoParaTeste {
 
-	private Grafo grafo;
-	private String vertice1, vertice2, vertice3, vertice4, vertice5 ;
-	private List<String> vertices;
-	private List<Aresta> arestas;
-	private Aresta aresta;
-	private int matAdj[][];
+	private static String vertice1 ;
+	private static String vertice2;
+	private static String vertice3;
+	private static String vertice4;
+	private static String vertice5;
+	private static List<String> vertices;
+	private static List<Aresta> arestas;
+	private static Aresta aresta;
+	private static int matAdj[][];
 	
 	public GrafoParaTeste() {
 		
 	}
 
-	private void inicializaAresta() {
+	private static void inicializaAresta() {
 
 		arestas = new ArrayList<Aresta>();
 		
@@ -32,7 +35,7 @@ public class GrafoParaTeste {
 		
 	}
 
-	private int[][] montaMatAdj() {
+	private static int[][] montaMatAdj() {
 		int matAdj[][] = {{0,1,1,0,0},
 			  	 		  {1,0,1,0,0},
 			  	 		  {1,1,0,1,0},
@@ -42,40 +45,40 @@ public class GrafoParaTeste {
 	}
 
 	//retorna o grafo criado no construtor
-	public Grafo criaGrafoSimples(){
-		this.inicializaVertices("0", "1", "2", "3", "4");
-		this.inicializaListaVertices();
-		this.matAdj = montaMatAdj();
-		this.inicializaAresta();
+	public static Grafo criaGrafoSimples(){
+		inicializaVertices("0", "1", "2", "3", "4");
+		inicializaListaVertices();
+		matAdj = montaMatAdj();
+		inicializaAresta();
 		
-		return new Grafo(vertices, matAdj, arestas);
+		return new Grafo(vertices, matAdj, arestas, true);
 	}
 	
-	public Grafo criaGrafoDesconexo(){
-		this.inicializaVertices("0", "1", "2", "3", "4");
-		this.inicializaListaVertices();
+	public static Grafo criaGrafoDesconexo(){
+		inicializaVertices("0", "1", "2", "3", "4");
+		inicializaListaVertices();
 		int matAdj[][] ={{0,1,0,1},{1,0,0,1},{0,0,0,0},{1,1,0,0}};
 		
 		
-		Grafo grafoDesconexo = new Grafo(this.vertices, this.matAdj, arestas);
+		Grafo grafoDesconexo = new Grafo(vertices, matAdj, arestas, false);
 		
 		return grafoDesconexo;
 	}
 	
-	public Grafo criaGrafoPonderado(){
-		this.inicializaVertices("0", "1", "2", "3", "4");
-		this.inicializaListaVertices();
+	public static Grafo criaGrafoPonderado(){
+		inicializaVertices("0", "1", "2", "3", "4");
+		inicializaListaVertices();
 		int matAdjAux[][] ={{0,10,0,12,0},{10,0,0,6,0},{0,0,0,9,15},{12,6,9,0,0},{0,0,15,0,0}}; 
-		this.matAdj = matAdjAux;
+		matAdj = matAdjAux;
 		
-		this.inicializaAresta();
+		inicializaAresta();
 		
-		Grafo grafoPonderado = new Grafo(this.vertices, this.matAdj, this.arestas);
+		Grafo grafoPonderado = new Grafo(vertices, matAdj, arestas, true);
 		
 		return grafoPonderado;
 	}
 
-	private void inicializaVertices(String v1, String v2, String v3, String v4, String v5) {
+	private static void inicializaVertices(String v1, String v2, String v3, String v4, String v5) {
 		vertice1 = v1;
 		vertice2 = v2;
 		vertice3 = v3;
@@ -84,7 +87,7 @@ public class GrafoParaTeste {
 	
 	}
 	
-	private void inicializaListaVertices() {
+	private static void inicializaListaVertices() {
 		vertices = new ArrayList<String>();
 		
 		//Adiciona os vertices na lista
@@ -96,15 +99,15 @@ public class GrafoParaTeste {
 		
 	}
 
-	public Grafo criaGrafoRotulado() {
+	public static Grafo criaGrafoRotulado() {
 
-		this.inicializaVertices("A", "B", "C", "D", "E");
-		this.inicializaListaVertices();
-		this.matAdj = montaMatAdj();
-		this.inicializaAresta();
-		grafo = new Grafo(vertices, matAdj, arestas);
+		inicializaVertices("A", "B", "C", "D", "E");
+		inicializaListaVertices();
+		matAdj = montaMatAdj();
+		inicializaAresta();
+		Grafo grafoRotulado = new Grafo(vertices, matAdj, arestas, true);
 		
-		return grafo;
+		return grafoRotulado;
 	}
 
 	

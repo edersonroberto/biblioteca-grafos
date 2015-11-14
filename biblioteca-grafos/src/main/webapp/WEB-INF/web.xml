@@ -12,7 +12,22 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  
+  <context-param>
+  	<param-name>primefaces.UPLOADER</param-name>
+  	<param-value>auto|native|commons</param-value>
+  </context-param>
+  
+  <filter> 
+  	<filter-name>primeUploadFilter</filter-name> 
+  	<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class> 
+  </filter> 
+  <filter-mapping> 
+  	<filter-name>primeUploadFilter</filter-name> 
+  	<servlet-name>Faces Servlet</servlet-name> 
+  </filter-mapping>
+
   
 </web-app>

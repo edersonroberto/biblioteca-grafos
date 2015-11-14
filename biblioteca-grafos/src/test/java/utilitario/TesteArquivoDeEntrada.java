@@ -23,7 +23,7 @@ public class TesteArquivoDeEntrada {
 
 			e.printStackTrace();
 		}
-		assertEquals(21, arquivoRetornado.size());
+		assertEquals(22, arquivoRetornado.size());
 
 	}
 

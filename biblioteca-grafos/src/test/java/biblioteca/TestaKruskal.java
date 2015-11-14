@@ -11,9 +11,8 @@ public class TestaKruskal {
 	
 	@Before
 	public void criaGrafo(){
-		
-		GrafoParaTeste grafoTeste = new GrafoParaTeste();
-		grafo = grafoTeste.criaGrafoPonderado();
+
+		grafo = GrafoParaTeste.criaGrafoPonderado();
 		
 	}
 	
@@ -25,7 +24,10 @@ public class TestaKruskal {
 				+ "0 1 10,\n"
 				+ "3 0 12,\n"
 				+ "37\n";
-		assertEquals(esperado, grafo.kruskal());
+		
+		Kruskal kruskal = new Kruskal();
+		
+		assertEquals(esperado, kruskal.arvoreGeradoraMinima(grafo));
 	}
 
 }

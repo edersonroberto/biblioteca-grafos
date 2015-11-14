@@ -24,17 +24,18 @@ public class ControladorGrafo {
 		
 		vertices = new ArrayList<String>();
 		arestas = new ArrayList<Aresta>();
-
+		boolean ehConexo;
 		
 		linhas.remove("Grafo");
 		montaVertices(linhas);
 		
-		
+		linha = linhas.get(0);
 		// Verifica se o vertice é direcionado e se ele tem peso
 		if (linha.contains("true"))
 			ehDirecionado = true;
 		linhas.remove(0);
 		
+		linha = linhas.get(0);
 		if (linha.contains("true"))
 			temPeso = true;
 		
@@ -42,11 +43,15 @@ public class ControladorGrafo {
 			linhas.remove(0);
 		
 		arrayAdj = montaArrayAdjacencia(linhas);
-
-		grafo = new Grafo(vertices, arrayAdj, arestas);
+		
+		ehConexo = verificaConexidade();
+		
+		grafo = new Grafo(vertices, arrayAdj, arestas, ehConexo);
 
 		return grafo;
 	}
+
+
 
 	private void montaVertices(List<String> linhas){
 		TrataLinha trataLinha = new TrataLinha();
@@ -116,6 +121,19 @@ public class ControladorGrafo {
 		if (ehDirecionado == false)
 			arrayAdj[j][i] = valorMat;
 
+	}
+	
+	private boolean verificaConexidade() {
+
+		for (Aresta aresta : arestas) {
+			for (String v : vertices) {
+				if(aresta.getOrigem().equals(v) || aresta.getDestino().equals(v))
+					return true;
+			}
+			
+		}
+		
+		return false;
 	}
 	
 	

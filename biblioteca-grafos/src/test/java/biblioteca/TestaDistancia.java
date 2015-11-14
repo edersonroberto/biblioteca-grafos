@@ -1,6 +1,6 @@
 package biblioteca;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,27 +8,29 @@ import org.junit.Test;
 public class TestaDistancia {
 	
 	private Grafo grafo;
+	private Distancia distancia;
 	
 	@Before
 	public void criaGrafo(){
 		
-		GrafoParaTeste grafoTeste = new GrafoParaTeste();
-		grafo = grafoTeste.criaGrafoPonderado();
-		
+		grafo = GrafoParaTeste.criaGrafoPonderado();
+		distancia = new Distancia();
 	}
 	
 	@Test
 	public void testeCalculoDistancia(){
-		String caminho[] = {"0", "1", "3"};
-		String esperado = "Distancia 0 1 3:\n16";
-		assertEquals(esperado, grafo.distancia(caminho));
+		String caminho[] = {"Distancia", "0", "1", "3"};
+		String esperado = "Distancia 0 1 3:\n16\n";
+		
+		assertEquals(esperado, distancia.calculaDistancia(grafo, caminho));
 	}
 	
+
 	@Test
 	public void testeCalculoDistancia4Vertices(){
-		String caminho[] = {"0", "1", "3","2"};
-		String esperado = "Distancia 0 1 3 2:\n25";
-		assertEquals(esperado, grafo.distancia(caminho));
+		String caminho[] = {"Distancia", "0", "1", "3","2"};
+		String esperado = "Distancia 0 1 3 2:\n25\n";
+		assertEquals(esperado, distancia.calculaDistancia(grafo, caminho));
 		
 	}
 

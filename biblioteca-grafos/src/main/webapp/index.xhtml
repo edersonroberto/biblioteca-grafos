@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 	<title>bibliotecas grafos</title>
@@ -10,6 +11,38 @@
 <h:body>
 
 	<h1>Biblioteca Grafos</h1>
+
+	<h:form enctype="multipart/form-data">
+		<p:fileUpload value="#{UploadDeArquivo.arquivo}" mode="simple"></p:fileUpload>
+		<p:separator />
+		<h:commandButton value="Enviar"
+			actionListener="#{UploadDeArquivo.fazerUpload}" ajax="false">
+			<f:setPropertyActionListener
+				value="#{UploadDeArquivo.controleSaida.distancia}"
+				target="#{ControladorSaida.distancia}"></f:setPropertyActionListener>
+
+			<f:setPropertyActionListener
+				value="#{UploadDeArquivo.controleSaida.buscaPorLargura}"
+				target="#{ControladorSaida.buscaPorLargura}"></f:setPropertyActionListener>
+
+			<f:setPropertyActionListener
+				value="#{UploadDeArquivo.controleSaida.buscaPorProfundidade}"
+				target="#{ControladorSaida.buscaPorProfundidade}"></f:setPropertyActionListener>
+		
+		<f:setPropertyActionListener
+				value="#{UploadDeArquivo.controleSaida.menorCaminho}"
+				target="#{ControladorSaida.menorCaminho}"></f:setPropertyActionListener>
+		
+		<f:setPropertyActionListener
+				value="#{UploadDeArquivo.controleSaida.prim}"
+				target="#{ControladorSaida.prim}"></f:setPropertyActionListener>
+		
+		<f:setPropertyActionListener
+				value="#{UploadDeArquivo.controleSaida.kruskal}"
+				target="#{ControladorSaida.kruskal}"></f:setPropertyActionListener>
+		
+		</h:commandButton>
+	</h:form>
 
 
 </h:body>

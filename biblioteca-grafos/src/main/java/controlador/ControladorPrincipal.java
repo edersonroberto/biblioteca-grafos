@@ -4,11 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-
 import utilitario.ArquivoDeEntrada;
 import biblioteca.Grafo;
 
@@ -19,29 +14,29 @@ public class ControladorPrincipal {
 	List<String> linhas ;
 	ArquivoDeEntrada arqEntrada;
 		
-	public boolean controlaFluxo(){
+	public boolean controlaFluxo(String arquivo, ControladorSaida controleSaida){
 		
 		ControladorGrafo controlarGrafo = new ControladorGrafo();
 		ControladorDeComandos controladorDeComandos = new ControladorDeComandos();
-		linhas = leArquivoDeEntrada();
+		linhas = leArquivoDeEntrada(arquivo);
 		
 		if(linhas != null){
 			
 			grafo = controlarGrafo.montaGrafo(linhas);
-			controladorDeComandos.executaComandos(grafo, linhas);
+			controladorDeComandos.executaComandos(grafo, linhas, controleSaida);
 			return true;
 		}
 		
 		return false;
 	}
 
-	private List<String> leArquivoDeEntrada() {
+	private List<String> leArquivoDeEntrada(String arquivo) {
 		
 		arqEntrada = new ArquivoDeEntrada();
 		linhas = new ArrayList<String>();
 		
 		try {
-			linhas = arqEntrada.trataArquivoDeEntrada("arquivo.txt");
+			linhas = arqEntrada.trataArquivoDeEntrada(arquivo);
 		} catch (IOException e) {
 			System.out.println("Falha ao ler arquivo " + e.getMessage());
 		}

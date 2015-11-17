@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>bibliotecas grafos</title>
+</h:head>
+
+<h:body>
+
+	<p:layout style="min-width:600px;min-height:600px;">
+		<p:layoutUnit position="east" resizable="true" size="300"
+			minSize="100" maxSize="400">
+			<h:form id="form">
+				<p:growl id="msgs" showDetail="true" />
+
+				<h3 style="margin-top: 0">Grafos</h3>
+				<p:accordionPanel>
+					<p:tab title="Distancia ">
+						<h:panelGrid columns="1" cellpadding="2">
+							<h:outputText value="#{ControladorSaida.distancia}" />
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="Busca Por Profundidade">
+						<h:panelGrid columns="1" cellpadding="2">
+							<h:outputText value="#{ControladorSaida.buscaPorProfundidade}" />
+						</h:panelGrid>
+					</p:tab>
+					<p:tab title="Busca Por Largura">
+						<h:panelGrid columns="1" cellpadding="2">
+							<h:outputText value="#{ControladorSaida.buscaPorLargura}" />
+						</h:panelGrid>
+					</p:tab>
+
+					<p:tab title="Menor Caminho">
+						<h:panelGrid columns="1" cellpadding="2">
+							<h:outputText value="#{ControladorSaida.menorCaminho}" />
+						</h:panelGrid>
+					</p:tab>
+
+					<p:tab title="Prim">
+						<h:panelGrid columns="1" cellpadding="2">
+							<h:outputText value="#{ControladorSaida.prim}" />
+						</h:panelGrid>
+					</p:tab>
+
+					<p:tab title="Kruskal">
+						<h:panelGrid columns="1" cellpadding="2">
+							<h:outputText value="#{ControladorSaida.kruskal}" />
+						</h:panelGrid>
+					</p:tab>
+
+				</p:accordionPanel>
+
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+        	Center
+    	</p:layoutUnit>
+	</p:layout>
+
+
+
+</h:body>
+
+</html>

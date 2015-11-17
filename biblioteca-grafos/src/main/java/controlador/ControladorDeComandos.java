@@ -14,10 +14,13 @@ import biblioteca.Prim;
 public class ControladorDeComandos {
 
 	private Grafo grafo;
-	ArquivoDeSaida arquivoSaida;
+	private ArquivoDeSaida arquivoSaida;
 
-	public void executaComandos(Grafo grafo, List<String> linhas) {
-		arquivoSaida = new ArquivoDeSaida("saida/saida");
+	
+	public void executaComandos(Grafo grafo, List<String> linhas, ControladorSaida controleSaida) {
+		
+	
+		arquivoSaida = new ArquivoDeSaida("C:/saida/");
 		String caracteres[];
 		this.grafo = grafo;
 		TrataLinha trataLinha = new TrataLinha();
@@ -26,12 +29,13 @@ public class ControladorDeComandos {
 
 		for (String linha : linhas) {
 			caracteres = trataLinha.trataLinha(linha);
-			executaComandos(caracteres);
+			executaComandos(caracteres, controleSaida);
 		}
+		
 
 	}
 
-	private void executaComandos(String[] caracteres) {
+	private void executaComandos(String[] caracteres, ControladorSaida controleSaida) {
 		String resultado = "";
 
 		String comando = caracteres[0].toLowerCase();
@@ -40,26 +44,32 @@ public class ControladorDeComandos {
 			case "distancia":
 				Distancia distancia = new Distancia();
 				resultado = distancia.calculaDistancia(grafo, caracteres);
+				controleSaida.setDistancia(resultado);
 				break;
 			case "profundidade":
 				Busca buscaProfundidade = new Busca();
 				resultado = buscaProfundidade.buscaPorProfundidade(grafo, caracteres[1], caracteres[2]);
+				controleSaida.setBuscaPorProfundidade(resultado);
 				break;
 			case "largura":
 				Busca buscaLargura = new Busca();
 				resultado = buscaLargura.buscaPorLargura(grafo, caracteres[1], caracteres[2]);
+				controleSaida.setBuscaPorLargura(resultado);
 				break;
 			case "menor":
 				Dijkstra dijkstra = new Dijkstra();
 				resultado = dijkstra.menorCaminho(grafo, caracteres[2], caracteres[3]);
+				controleSaida.setMenorCaminho(resultado);
 				break;
 			case "prim":
 				Prim prim = new Prim();
 				resultado = prim.arvoreGeradoraMinima(grafo, caracteres[1]);
+				controleSaida.setPrim(resultado);
 				break;
 			case "kruskal":
 				Kruskal kruskal = new Kruskal();
 				resultado = kruskal.arvoreGeradoraMinima(grafo);
+				controleSaida.setKruskal(resultado);
 				break;
 			default:
 				return;

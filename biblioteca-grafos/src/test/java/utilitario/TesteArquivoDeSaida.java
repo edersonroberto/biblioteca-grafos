@@ -11,7 +11,7 @@ public class TesteArquivoDeSaida {
 	
 	@Before
 	public void criaArquivoDeSaida(){
-		arqSaida = new ArquivoDeSaida("teste");
+		arqSaida = new ArquivoDeSaida("d:/teste");
 	}
 	
 	@Test

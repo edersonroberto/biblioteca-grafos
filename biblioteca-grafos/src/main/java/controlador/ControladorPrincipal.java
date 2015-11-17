@@ -4,26 +4,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import utilitario.ArquivoDeEntrada;
 import biblioteca.Grafo;
 
-
+@ManagedBean(name="ControladorPrincipal")
+@SessionScoped
 public class ControladorPrincipal {
 	
 	private Grafo grafo;
-	List<String> linhas ;
-	ArquivoDeEntrada arqEntrada;
-		
-	public boolean controlaFluxo(String arquivo, ControladorSaida controleSaida){
+	private List<String> linhas ;
+	private ArquivoDeEntrada arqEntrada;
+	private ControladorSaida controladorSaida;
+	
+	public void onload(){
+		controlaFluxo("c:\\saida\\arquivo.txt");
+	}
+	
+	public boolean controlaFluxo(String arquivo){
 		
 		ControladorGrafo controlarGrafo = new ControladorGrafo();
 		ControladorDeComandos controladorDeComandos = new ControladorDeComandos();
+		controladorSaida = new ControladorSaida();
 		linhas = leArquivoDeEntrada(arquivo);
 		
 		if(linhas != null){
 			
 			grafo = controlarGrafo.montaGrafo(linhas);
-			controladorDeComandos.executaComandos(grafo, linhas, controleSaida);
+			controladorDeComandos.executaComandos(grafo, linhas, controladorSaida);
 			return true;
 		}
 		
@@ -42,6 +52,15 @@ public class ControladorPrincipal {
 		}
 		
 		return linhas;
+	}
+	
+	
+	public ControladorSaida getControladorSaida() {
+		return controladorSaida;
+	}
+
+	public void setControladorSaida(ControladorSaida controladorSaida) {
+		this.controladorSaida = controladorSaida;
 	}
 	
 }

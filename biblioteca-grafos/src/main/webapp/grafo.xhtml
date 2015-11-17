@@ -9,6 +9,10 @@
 
 <h:body>
 
+	 <h:form>
+        <p:remoteCommand name="onload" action="#{ControladorPrincipal.onload}" autoRun="true" />
+    </h:form>
+
 	<p:layout style="min-width:600px;min-height:600px;">
 		<p:layoutUnit position="east" resizable="true" size="300"
 			minSize="100" maxSize="400">
@@ -19,35 +23,35 @@
 				<p:accordionPanel>
 					<p:tab title="Distancia ">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorSaida.distancia}" />
+							<h:outputText value="#{ControladorPrincipal.controladorSaida.distancia}" />
 						</h:panelGrid>
 					</p:tab>
 					<p:tab title="Busca Por Profundidade">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorSaida.buscaPorProfundidade}" />
+							<h:outputText value="#{ControladorPrincipal.controladorSaida.buscaPorProfundidade}" />
 						</h:panelGrid>
 					</p:tab>
 					<p:tab title="Busca Por Largura">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorSaida.buscaPorLargura}" />
+							<h:outputText value="#{ControladorPrincipal.controladorSaida.buscaPorLargura}" />
 						</h:panelGrid>
 					</p:tab>
 
 					<p:tab title="Menor Caminho">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorSaida.menorCaminho}" />
+							<h:outputText value="#{ControladorPrincipal.controladorSaida.menorCaminho}" />
 						</h:panelGrid>
 					</p:tab>
 
 					<p:tab title="Prim">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorSaida.prim}" />
+							<h:outputText value="#{ControladorPrincipal.controladorSaida.prim}" />
 						</h:panelGrid>
 					</p:tab>
 
 					<p:tab title="Kruskal">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorSaida.kruskal}" />
+							<h:outputText value="#{ControladorPrincipal.controladorSaida.kruskal}" />
 						</h:panelGrid>
 					</p:tab>
 

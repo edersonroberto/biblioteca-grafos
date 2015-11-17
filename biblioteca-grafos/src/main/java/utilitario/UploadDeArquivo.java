@@ -1,4 +1,4 @@
-package controlador;
+package utilitario;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,12 +12,13 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
 
+import controlador.ControladorSaida;
+
 @ManagedBean(name = "UploadDeArquivo")
 @SessionScoped
 public class UploadDeArquivo {
 
 	private UploadedFile arquivo;
-	private String arquivoCarregado;
 	private ControladorSaida controleSaida;
 
 	public ControladorSaida getControleSaida() {
@@ -37,45 +38,32 @@ public class UploadDeArquivo {
 	}
 
 	public void fazerUpload() {
-		
+		boolean foiCopiado = false;
 		controleSaida = new ControladorSaida();
 		System.out.println("Arquivo recebido :: " + arquivo.getFileName()
 				+ " :: " + "Tamanho do arquivo :: " + arquivo.getSize());
 
-		String nomeArquivo = arquivo.getFileName();
-
-		if (nomeArquivo.contains("\\"))
-			arquivoCarregado = "C:\\saida"+ nomeArquivo.substring(nomeArquivo.lastIndexOf('\\'));
-		else
-			arquivoCarregado = "C:\\saida\\" + nomeArquivo;
-
 		try {
-			copiaArquivo(nomeArquivo, arquivo.getInputstream());
+			foiCopiado = copiarArquivo(arquivo.getInputstream());
 		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
-		ControladorPrincipal controlador = new ControladorPrincipal();
-
-		boolean subiu = controlador.controlaFluxo(arquivoCarregado, controleSaida);
-		
-		controleSaida.colocaNaSessao();
-		
-		if (subiu){
+			
+		if (foiCopiado){
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("grafo.xhtml");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 
 	}
 
-	public void copiaArquivo(String fileName, InputStream in) {
+	public boolean copiarArquivo(InputStream in) {
 		try {
 
-			OutputStream out = new FileOutputStream(new File(arquivoCarregado));
+			OutputStream out = new FileOutputStream(new File("c:\\saida\\arquivo.txt"));
 
 			int read = 0;
 			byte[] bytes = new byte[1024];
@@ -88,10 +76,12 @@ public class UploadDeArquivo {
 			out.flush();
 			out.close();
 
-			System.out.println("New file created!");
+			System.out.println("Novo arquivo criado com sucesso!");
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
+			return false;
 		}
+		return true;
 	}
 
 }

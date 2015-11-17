@@ -15,6 +15,8 @@ public class Kruskal {
 		String caminho = "Kruskal:\n";
 		arestas = grafo.getArestas();
 		vertices = grafo.getVertices();
+	
+		Collections.sort(this.arestas);
 		
 		List<Aresta> floresta = new ArrayList<Aresta>();
 		/*
@@ -25,7 +27,7 @@ public class Kruskal {
 		 * for(int i=0; i< vertices.size(); i++){ florestas[i] = new
 		 * ArrayList<String>(); florestas[i].add(vertices.get(i)); }
 		 */
-		Collections.sort(this.arestas);
+		
 		int totalVertices = 0;
 		int custo = 0;
 		while (!arestas.isEmpty() && (totalVertices < vertices.size() - 1)) {

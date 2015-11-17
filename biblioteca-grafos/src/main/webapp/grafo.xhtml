@@ -5,13 +5,19 @@
 
 <h:head>
 	<title>bibliotecas grafos</title>
+
 </h:head>
 
 <h:body>
 
-	 <h:form>
-        <p:remoteCommand name="onload" action="#{ControladorPrincipal.onload}" autoRun="true" />
-    </h:form>
+	<script src="../../../jquery.min.js"></script>
+	<script src="../../../arbor.js"></script>
+	<script src="../../../arbor-tween.js"></script>
+
+	<h:form>
+		<p:remoteCommand name="onload" action="#{ControladorPrincipal.onload}"
+			autoRun="true" />
+	</h:form>
 
 	<p:layout style="min-width:600px;min-height:600px;">
 		<p:layoutUnit position="east" resizable="true" size="300"
@@ -23,35 +29,41 @@
 				<p:accordionPanel>
 					<p:tab title="Distancia ">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorPrincipal.controladorSaida.distancia}" />
+							<h:outputText
+								value="#{ControladorPrincipal.controladorSaida.distancia}" />
 						</h:panelGrid>
 					</p:tab>
 					<p:tab title="Busca Por Profundidade">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorPrincipal.controladorSaida.buscaPorProfundidade}" />
+							<h:outputText
+								value="#{ControladorPrincipal.controladorSaida.buscaPorProfundidade}" />
 						</h:panelGrid>
 					</p:tab>
 					<p:tab title="Busca Por Largura">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorPrincipal.controladorSaida.buscaPorLargura}" />
+							<h:outputText
+								value="#{ControladorPrincipal.controladorSaida.buscaPorLargura}" />
 						</h:panelGrid>
 					</p:tab>
 
 					<p:tab title="Menor Caminho">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorPrincipal.controladorSaida.menorCaminho}" />
+							<h:outputText
+								value="#{ControladorPrincipal.controladorSaida.menorCaminho}" />
 						</h:panelGrid>
 					</p:tab>
 
 					<p:tab title="Prim">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorPrincipal.controladorSaida.prim}" />
+							<h:outputText
+								value="#{ControladorPrincipal.controladorSaida.prim}" />
 						</h:panelGrid>
 					</p:tab>
 
 					<p:tab title="Kruskal">
 						<h:panelGrid columns="1" cellpadding="2">
-							<h:outputText value="#{ControladorPrincipal.controladorSaida.kruskal}" />
+							<h:outputText
+								value="#{ControladorPrincipal.controladorSaida.kruskal}" />
 						</h:panelGrid>
 					</p:tab>
 
@@ -61,7 +73,7 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-        	Center
+        	Center      	
     	</p:layoutUnit>
 	</p:layout>
 

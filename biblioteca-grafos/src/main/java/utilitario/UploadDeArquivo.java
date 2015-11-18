@@ -52,7 +52,7 @@ public class UploadDeArquivo {
 			
 		if (foiCopiado){
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("grafo.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("teste.html");
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}

@@ -1,40 +1,22 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
 
-
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/arbor.js"></script>
-<script type="text/javascript" src="resources/js/graphics.js"></script>
-<script type="text/javascript" src="resources/js/renderer.js"></script>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>arbor.js » atlas</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Christian Swinehart">
+	<link rel="stylesheet" href="style/atlas.css" type="text/css" charset="utf-8">
 </head>
 <body>
-	
-	<canvas id="viewport" width="800" height="600"></canvas>
-	<script type="text/javascript">
-		var sys = arbor.ParticleSystem(1000, 400, 1);
-		sys.parameters({gravity : false});
-		sys.renderer = Renderer("#viewport");
+  <div id="maps"><a href="/">back</a><ul></ul></div>
+  <canvas id="viewport" width="800" height="600"></canvas>
 
-		var v_1 = sys.addNode('1', {'length' : 200, 'color' : 'blue','shape' : 'dot','label' : '1'});
-		var v_2 = sys.addNode('2', {'length' : 20, 'color' : 'blue','shape' : 'dot','label' : '2'});
-		var v_3 = sys.addNode('3', {'length' : 200, 'color' : 'blue','shape' : 'dot','label' : '3'});
-		var v_4 = sys.addNode('4', {'length' : 20, 'color' : 'blue','shape' : 'dot','label' : '4'});
+  <div id="dataset">Derived from Wikipedia’s <a href="http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_land_borders">List of countries and territories by land borders</a></div>
 
-		sys.addEdge(v_1, v_2);
-		sys.addEdge(v_1, v_3);
-		sys.addEdge(v_2, v_3);
-		sys.addEdge(v_2, v_4);
-		sys.addEdge(v_3, v_4);
-		
-		
-	</script>
-	
+  <script src="resources/js/jquery-1.6.1.min.js"></script>
+  <script src="resources/js/lib/arbor.js"></script>
+  <script src="resources/atlas.js"></script>
 </body>
 </html>

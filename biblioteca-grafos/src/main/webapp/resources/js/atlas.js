@@ -179,12 +179,12 @@
     }
 
     var _maps = {
-      distancia:{title:"Distancia", p:{stiffness:600}, source:_sources.states},
-      buscaPorProfundidade:{title:"Busca Por Profundidade", p:{stiffness:300}, source:_sources.nations},
-      buscaPorLargura:{title:"Busca Por Largura", p:{stiffness:500}, source:_sources.nations},
-      menorCaminho:{title:"Menor Caminho", p:{stiffness:300}, source:_sources.nations},
-      prim:{title:"Prim", p:{stiffness:500}, source:_sources.nations},
-      kruskal:{title:"Kruskal", p:{stiffness:400}, source:_sources.risk}
+      usofa:{title:"United States", p:{stiffness:600}, source:_sources.states},
+      africa:{title:"Africa", p:{stiffness:300}, source:_sources.nations},
+      asia:{title:"Asia", p:{stiffness:500}, source:_sources.nations},
+      europe:{title:"Europe", p:{stiffness:300}, source:_sources.nations},
+      mideast:{title:"Middle East", p:{stiffness:500}, source:_sources.nations},
+      risk:{title:"Risk", p:{stiffness:400}, source:_sources.risk}
     }
     
     var that = {
@@ -206,7 +206,7 @@
         return false
       },
       selectMap:function(map_id){
-        $.getJSON("maps/"+map_id+".json",function(data){
+        $.getJSON("africa.json",function(data){
           // load the raw data into the particle system as is (since it's already formatted correctly for .merge)
           var nodes = data.nodes
           $.each(nodes, function(name, info){

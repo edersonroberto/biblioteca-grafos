@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import utilitario.ArquivoDeEntrada;
+import utilitario.CriaJson;
 import biblioteca.Grafo;
 
 @ManagedBean(name="ControladorPrincipal")
@@ -18,6 +19,7 @@ public class ControladorPrincipal {
 	private List<String> linhas ;
 	private ArquivoDeEntrada arqEntrada;
 	private ControladorSaida controladorSaida;
+	private CriaJson criaJson;
 	
 	public void onload(){
 		controlaFluxo("c:\\saida\\arquivo.txt");
@@ -28,11 +30,14 @@ public class ControladorPrincipal {
 		ControladorGrafo controlarGrafo = new ControladorGrafo();
 		ControladorDeComandos controladorDeComandos = new ControladorDeComandos();
 		controladorSaida = new ControladorSaida();
+		criaJson = new CriaJson();
+		
 		linhas = leArquivoDeEntrada(arquivo);
 		
 		if(linhas != null){
 			
 			grafo = controlarGrafo.montaGrafo(linhas);
+			criaJson.CriarJon(grafo);
 			controladorDeComandos.executaComandos(grafo, linhas, controladorSaida);
 			return true;
 		}

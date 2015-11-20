@@ -179,6 +179,7 @@
     }
 
     var _maps = {
+      principal:{title:"Principal", p:{stiffness:400}, source:_sources.risk},	
       distancia:{title:"Distancia", p:{stiffness:600}, source:_sources.states},
       buscaPorProfundidade:{title:"Busca Por Profundidade", p:{stiffness:300}, source:_sources.nations},
       buscaPorLargura:{title:"Busca Por Largura", p:{stiffness:500}, source:_sources.nations},

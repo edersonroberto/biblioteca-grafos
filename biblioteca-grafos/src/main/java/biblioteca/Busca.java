@@ -27,11 +27,14 @@ public class Busca {
 
 			lista.add(origem);
 			verticeAtual = origem;
-
+			
+			//Faz um loop até que o vertice destino seja encontrado ou até que todos os vertices sejam visitados
 			while (!verticeAtual.equals(destino) && !(verticesVisitados.size() == vertices.size())) {
 				verticesVisitados.add(verticeAtual);
 				caminho += verticeAtual + " foi visitado.\n";
-
+				
+				// Percorre a matriz de adjacencia comparando a linha da matriz com o vertice atual,
+				// Quando encontra o vertice percorre a coluna e encontra os vizinhos do vertice atua.
 				for (int i = 0; i < vertices.size(); i++) {
 					if (verticeAtual.equals(vertices.get(i))) {
 						for (int j = 0; j < vertices.size(); j++) {
@@ -44,6 +47,7 @@ public class Busca {
 						}
 					}
 				}
+				
 				if (qtdVerticesVizinhos == 1) {
 					caminho += "é vizinho de " + verticeAtual + ".\n";
 				} else if (qtdVerticesVizinhos > 1) {
@@ -87,10 +91,13 @@ public class Busca {
 		lista.add(origem);
 		verticeAtual = origem;
 
+		//Faz um loop até que o vertice destino seja encontrado ou até que todos os vertices sejam visitados
 		while (!verticeAtual.equals(destino)) {
 			verticesVisitados.add(verticeAtual);
 			caminho += verticeAtual + " foi visitado.\n";
-
+			
+			// Percorre a matriz de adjacencia comparando a linha da matriz com o vertice atual,
+			// Quando encontra o vertice percorre a coluna e encontra os vizinhos do vertice atua.
 			for (int i = 0; i < vertices.size(); i++) {
 				if (verticeAtual.equals(vertices.get(i))) {
 					for (int j = 0; j < vertices.size(); j++) {

@@ -45,6 +45,7 @@ public class ControladorDeComandos {
 				Distancia distancia = new Distancia();
 				resultado = distancia.calculaDistancia(grafo, caracteres);
 				controleSaida.setDistancia(resultado);
+				
 				break;
 			case "profundidade":
 				Busca buscaProfundidade = new Busca();

@@ -5,15 +5,14 @@ import org.junit.Test;
 import biblioteca.Grafo;
 import biblioteca.GrafoParaTeste;
 
-public class TesteCriaJson {
+public class TesteCriaGrafoSaida {
 
 	@Test
 	public void testaCriarJson(){
 		
 		Grafo grafo = GrafoParaTeste.criaGrafoRotulado();
-		
-		CriaJson criaJson = new CriaJson();
-		criaJson.CriarJon(grafo);
+	
+		CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal");
 		
 	}
 }

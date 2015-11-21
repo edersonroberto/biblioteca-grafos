@@ -1,5 +1,6 @@
 package biblioteca;
 
+
 public class Aresta implements Comparable<Aresta> {
 	private String origem;
 	private String destino;

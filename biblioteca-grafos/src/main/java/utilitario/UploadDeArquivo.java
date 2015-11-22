@@ -20,7 +20,8 @@ public class UploadDeArquivo {
 
 	private UploadedFile arquivo;
 	private String diretorioSalvo;
-
+	private String diretorioAserSalvo;
+	
 	public UploadedFile getArquivo() {
 		return arquivo;
 	}
@@ -31,7 +32,8 @@ public class UploadDeArquivo {
 
 	public void fazerUpload() {
 		boolean foiCopiado = false;
-		diretorioSalvo = "c:\\saida\\arquivo.txt";
+		diretorioSalvo = "C:/saida/arquivo.txt";
+		diretorioAserSalvo ="C:/git/biblioteca-grafos/biblioteca-grafos/src/main/webapp/resources/";
 		
 		System.out.println("Arquivo recebido :: " + arquivo.getFileName()
 				+ " :: " + "Tamanho do arquivo :: " + arquivo.getSize());
@@ -39,7 +41,7 @@ public class UploadDeArquivo {
 		try {
 			foiCopiado = copiarArquivo(arquivo.getInputstream());
 			ControladorPrincipal controlador = new ControladorPrincipal();
-			controlador.controlaFluxo(diretorioSalvo);
+			controlador.controlaFluxo(diretorioSalvo, diretorioAserSalvo);
 		} catch (IOException e) {
 
 			e.printStackTrace();

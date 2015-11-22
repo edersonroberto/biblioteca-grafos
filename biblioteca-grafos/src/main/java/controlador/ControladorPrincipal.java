@@ -21,19 +21,20 @@ public class ControladorPrincipal {
 	private ControladorSaida controladorSaida;
 
 	
-	public boolean controlaFluxo(String arquivo){
+	public boolean controlaFluxo(String diretorioLido, String diretorioAserSalvo){
 		
 		ControladorGrafo controlarGrafo = new ControladorGrafo();
 		ControladorDeComandos controladorDeComandos = new ControladorDeComandos();
 		controladorSaida = new ControladorSaida();
-
-		linhas = leArquivoDeEntrada(arquivo);
+	 
+		
+		linhas = leArquivoDeEntrada(diretorioLido);
 		
 		if(linhas != null){
 			
 			grafo = controlarGrafo.montaGrafo(linhas);
-			CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal", null);
-			controladorDeComandos.executaComandos(grafo, linhas, controladorSaida);
+			CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorioAserSalvo, "principal", null);
+			controladorDeComandos.executaComandos(grafo, linhas, controladorSaida,diretorioAserSalvo);
 			return true;
 		}
 		

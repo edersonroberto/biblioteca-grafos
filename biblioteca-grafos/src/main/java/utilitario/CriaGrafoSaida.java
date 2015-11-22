@@ -1,6 +1,5 @@
 package utilitario;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +14,7 @@ public class CriaGrafoSaida {
 
 	// Essa classe é utilizada para criar o arquivo que será chamado na página
 	// html com os dados do grafo.
-	public static void CriarSaidaGrafo(Grafo grafo, String nome, String resultado) {
+	public static void CriarSaidaGrafo(Grafo grafo, String diretorio, String nome, String resultado) {
 		vertices = grafo.getVertices();
 		matAdj = grafo.getMatAdj();
 		System.out.println("Gerando Plotagem do Grafo...");
@@ -32,17 +31,8 @@ public class CriaGrafoSaida {
 	
 		criaAsArestasDoGrafo(corAresta, nome, resultado);
 		
+		diretorio += "js/" +nome + ".js"; 
 		
-		File file = new File("");
-		System.out.println("Absolute: " + file.getAbsolutePath());
-		try {
-			System.out.println("Canonical: " + file.getCanonicalPath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		String diretorio = "http:///localhost:8080/biblioteca-grafos/scr/main/webapp/resources/js/"+nome+ ".js"; 
 		gravaSaida(diretorio, arquivo);
 	}
 
@@ -74,14 +64,13 @@ public class CriaGrafoSaida {
 							+ vertices.get(j) + "',{'color':" + corAresta
 							+ ", 'weight':" + matAdj[i][j] + "});\n";
 					
-					corAresta = "'blue'";
+					corAresta = "'black'";
 				}
 			}
 		}
 
 	}
 	
-
 
 	private static boolean arestaDeveTrocarCor(String funcao,
 			List<String> vertices2, int i, int j, String resultado) {
@@ -94,12 +83,47 @@ public class CriaGrafoSaida {
 			case "dijkstra":
 				return verificaNoResultadoDijkstra(resultado, vertices, i, j);
 			case "prim":
-				return false;
+				return verificaNoResultadoPrimOuKruskal(resultado, vertices, i, j);
 			case "kruskal":
-				return false;
-			case "busca":
-				return false;
+				return verificaNoResultadoPrimOuKruskal(resultado, vertices, i, j);
+			case "buscaPorLargura":
+				return verificaNoResultadoBusca(resultado, vertices, i, j);
+			case "buscaPorProfundidade":
+				return verificaNoResultadoBusca(resultado, vertices, i, j);
 		}
+		
+		return false;
+	}
+
+	private static boolean verificaNoResultadoPrimOuKruskal(String resultado,
+			List<String> vertices2, int i, int j) {
+		String resultados[] = resultado.split("\n");
+		for (int k = 1; k < resultados.length; k++) {
+			String result[] = resultados[k].split(" ");
+			
+			if(result[0].equals(vertices.get(i)) && result[1].equals(vertices.get(j)))
+				return true;
+		}
+		
+		
+		return false;
+	}
+
+
+	private static boolean verificaNoResultadoBusca(String resultado,
+			List<String> vertices2, int i, int j) {
+		String resultados[] =resultado.split("\n");
+		
+		for(int ii = 1; ii < resultados.length-2; ii++ ){
+			if(resultados[ii].contains("foi visitado")){
+				if(resultados[ii].contains(vertices.get(i))){
+					if(resultados[ii+2].contains(vertices.get(j)))
+						return true;
+				}
+				
+			}
+		}
+	
 		
 		return false;
 	}
@@ -148,12 +172,12 @@ public class CriaGrafoSaida {
 
 	}
 
-	public static void geraHtml(String resultado, String nomeArquivo) {
+	public static void geraHtml(String resultado,String diretorio, String nomeArquivo) {
 		
 		
 		resultado = resultado.replace("\n", "</p>\n<p>");
 		String saidaHtml = "<p>"+ resultado + "</p>";
-		String diretorio = "c:\\saida\\html\\"+nomeArquivo+ ".html";//verificaDiretorio(nomeArquivo+".html");
+		diretorio += "html/" + nomeArquivo + ".html";
 		
 		gravaSaida(diretorio, saidaHtml);
 		

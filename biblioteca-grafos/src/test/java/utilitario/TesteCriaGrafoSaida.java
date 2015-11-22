@@ -11,8 +11,8 @@ public class TesteCriaGrafoSaida {
 	public void testaCriarJson(){
 		
 		Grafo grafo = GrafoParaTeste.criaGrafoRotulado();
-	
-		CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal", null);
+		String diretorio = "C:/saida/";
+		CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "principal", null);
 		
 	}
 }

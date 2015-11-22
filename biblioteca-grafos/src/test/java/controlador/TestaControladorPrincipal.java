@@ -8,8 +8,10 @@ public class TestaControladorPrincipal {
 	
 	@Test
 	public void testeControladorPrincipal(){
+		String diretorioAserSalvo = "C:/saida/";
+		
 		ControladorPrincipal controladorPrincipal = new ControladorPrincipal();
-		assertEquals(true, controladorPrincipal.controlaFluxo("arquivo.txt"));
+		assertEquals(true, controladorPrincipal.controlaFluxo("arquivo.txt", diretorioAserSalvo));
 		
 	}
 

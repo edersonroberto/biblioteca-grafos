@@ -18,7 +18,7 @@ public class ControladorDeComandos {
 	private ArquivoDeSaida arquivoSaida;
 	private int contDistancia ;
 	
-	public void executaComandos(Grafo grafo, List<String> linhas, ControladorSaida controleSaida) {
+	public void executaComandos(Grafo grafo, List<String> linhas, ControladorSaida controleSaida, String diretorio) {
 		
 		contDistancia = 1;
 		arquivoSaida = new ArquivoDeSaida("C:/saida/");
@@ -26,17 +26,16 @@ public class ControladorDeComandos {
 		this.grafo = grafo;
 		TrataLinha trataLinha = new TrataLinha();
 		linhas.remove("Comandos");
-		
 
 		for (String linha : linhas) {
 			caracteres = trataLinha.trataLinha(linha);
-			executaComandos(caracteres, controleSaida);
+			executaComandos(caracteres, controleSaida, diretorio);
 		}
 		
 
 	}
 
-	private void executaComandos(String[] caracteres, ControladorSaida controleSaida) {
+	private void executaComandos(String[] caracteres, ControladorSaida controleSaida, String diretorio) {
 		String resultado = "";
 
 		String comando = caracteres[0].toLowerCase();
@@ -48,8 +47,8 @@ public class ControladorDeComandos {
 				resultado = distancia.calculaDistancia(grafo, caracteres);
 				controleSaida.setDistancia(resultado);
 				System.out.println("Salvando grafo com o da distancia...");
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, "distancia"+contDistancia, resultado);
-				CriaGrafoSaida.geraHtml(resultado, "distancia"+contDistancia);
+				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio,"distancia"+contDistancia, resultado);
+				CriaGrafoSaida.geraHtml(resultado, diretorio, "\\distancia"+contDistancia);
 				contDistancia++;
 				
 				
@@ -59,8 +58,8 @@ public class ControladorDeComandos {
 				Busca buscaProfundidade = new Busca();
 				resultado = buscaProfundidade.buscaPorProfundidade(grafo, caracteres[1], caracteres[2]);
 				controleSaida.setBuscaPorProfundidade(resultado);
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, "buscaPorProfundidade", resultado);
-				CriaGrafoSaida.geraHtml(resultado, "buscaPorProfundidade");
+				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "buscaPorProfundidade", resultado);
+				CriaGrafoSaida.geraHtml(resultado, diretorio, "buscaPorProfundidade");
 				
 				break;
 			case "largura":
@@ -68,8 +67,8 @@ public class ControladorDeComandos {
 				Busca buscaLargura = new Busca();
 				resultado = buscaLargura.buscaPorLargura(grafo, caracteres[1], caracteres[2]);
 				controleSaida.setBuscaPorLargura(resultado);
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, "buscaPorLargura", resultado);
-				CriaGrafoSaida.geraHtml(resultado, "buscaPorLargura");
+				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "buscaPorLargura", resultado);
+				CriaGrafoSaida.geraHtml(resultado,diretorio, "buscaPorLargura");
 				
 				break;
 			case "menor":
@@ -77,24 +76,24 @@ public class ControladorDeComandos {
 				Dijkstra dijkstra = new Dijkstra();
 				resultado = dijkstra.menorCaminho(grafo, caracteres[2], caracteres[3]);
 				controleSaida.setMenorCaminho(resultado);
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, "dijkstra", resultado);
-				CriaGrafoSaida.geraHtml(resultado, "dijkstra");
+				CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "dijkstra", resultado);
+				CriaGrafoSaida.geraHtml(resultado,diretorio,  "dijkstra");
 				break;
 			case "prim":
 				System.out.println("Executando algoritmo de prim");
 				Prim prim = new Prim();
 				resultado = prim.arvoreGeradoraMinima(grafo, caracteres[1]);
 				controleSaida.setPrim(resultado);
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, "prim", resultado);
-				CriaGrafoSaida.geraHtml(resultado, "prim");
+				CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "prim", resultado);
+				CriaGrafoSaida.geraHtml(resultado,diretorio, "prim");
 				break;
 			case "kruskal":
 				System.out.println("Executando algoritmo de kruskal");
 				Kruskal kruskal = new Kruskal();
 				resultado = kruskal.arvoreGeradoraMinima(grafo);
 				controleSaida.setKruskal(resultado);
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, "kruskal", resultado);
-				CriaGrafoSaida.geraHtml(resultado, "kruskal");
+				CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "kruskal", resultado);
+				CriaGrafoSaida.geraHtml(resultado,diretorio, "kruskal");
 				
 				break;
 			default:

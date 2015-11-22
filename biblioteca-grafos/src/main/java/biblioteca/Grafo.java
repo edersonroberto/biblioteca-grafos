@@ -11,14 +11,21 @@ public class Grafo {
 	private List<Aresta> arestas;
 	private int matAdj[][];
 	private boolean ehConexo;
+	private boolean temPeso;
 
-	public Grafo(List<String> vertices, int matAdj[][], List<Aresta> arestas, boolean ehConexo) {
+	public Grafo(List<String> vertices, int matAdj[][], List<Aresta> arestas, boolean ehConexo, boolean temPeso) {
 		this.vertices = vertices;
 		this.matAdj = matAdj;
 		this.arestas = arestas;
 		this.ehConexo = ehConexo;
+		this.temPeso = temPeso;
 	}
 	
+
+	public boolean temPeso() {
+		return temPeso;
+	}
+
 
 	public String buscaPorProfundidade(String origem, String destino) {
 

@@ -12,7 +12,7 @@ public class TesteCriaGrafoSaida {
 		
 		Grafo grafo = GrafoParaTeste.criaGrafoRotulado();
 	
-		CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal");
+		CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal", null);
 		
 	}
 }

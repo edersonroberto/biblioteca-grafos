@@ -12,22 +12,14 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
 
-import controlador.ControladorSaida;
+import controlador.ControladorPrincipal;
 
 @ManagedBean(name = "UploadDeArquivo")
 @SessionScoped
 public class UploadDeArquivo {
 
 	private UploadedFile arquivo;
-	private ControladorSaida controleSaida;
-
-	public ControladorSaida getControleSaida() {
-		return controleSaida;
-	}
-
-	public void setControleSaida(ControladorSaida controleSaida) {
-		this.controleSaida = controleSaida;
-	}
+	private String diretorioSalvo;
 
 	public UploadedFile getArquivo() {
 		return arquivo;
@@ -39,12 +31,15 @@ public class UploadDeArquivo {
 
 	public void fazerUpload() {
 		boolean foiCopiado = false;
-		controleSaida = new ControladorSaida();
+		diretorioSalvo = "c:\\saida\\arquivo.txt";
+		
 		System.out.println("Arquivo recebido :: " + arquivo.getFileName()
 				+ " :: " + "Tamanho do arquivo :: " + arquivo.getSize());
 
 		try {
 			foiCopiado = copiarArquivo(arquivo.getInputstream());
+			ControladorPrincipal controlador = new ControladorPrincipal();
+			controlador.controlaFluxo(diretorioSalvo);
 		} catch (IOException e) {
 
 			e.printStackTrace();
@@ -52,7 +47,7 @@ public class UploadDeArquivo {
 			
 		if (foiCopiado){
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("saida_grafo.html");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("saidaGrafoPrincipal.html");
 			} catch (IOException e) {
 				System.out.println(e.getMessage());
 			}
@@ -63,7 +58,7 @@ public class UploadDeArquivo {
 	public boolean copiarArquivo(InputStream in) {
 		try {
 
-			OutputStream out = new FileOutputStream(new File("c:\\saida\\arquivo.txt"));
+			OutputStream out = new FileOutputStream(new File(diretorioSalvo));
 
 			int read = 0;
 			byte[] bytes = new byte[1024];

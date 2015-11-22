@@ -51,7 +51,7 @@ public class GrafoParaTeste {
 		matAdj = montaMatAdj();
 		inicializaAresta();
 		
-		return new Grafo(vertices, matAdj, arestas, true);
+		return new Grafo(vertices, matAdj, arestas, true, false);
 	}
 	
 	public static Grafo criaGrafoDesconexo(){
@@ -60,7 +60,7 @@ public class GrafoParaTeste {
 		int matAdj[][] ={{0,1,0,1},{1,0,0,1},{0,0,0,0},{1,1,0,0}};
 		
 		
-		Grafo grafoDesconexo = new Grafo(vertices, matAdj, arestas, false);
+		Grafo grafoDesconexo = new Grafo(vertices, matAdj, arestas, false, false);
 		
 		return grafoDesconexo;
 	}
@@ -73,7 +73,7 @@ public class GrafoParaTeste {
 		
 		inicializaAresta();
 		
-		Grafo grafoPonderado = new Grafo(vertices, matAdj, arestas, true);
+		Grafo grafoPonderado = new Grafo(vertices, matAdj, arestas, true, true);
 		
 		return grafoPonderado;
 	}
@@ -105,7 +105,7 @@ public class GrafoParaTeste {
 		inicializaListaVertices();
 		matAdj = montaMatAdj();
 		inicializaAresta();
-		Grafo grafoRotulado = new Grafo(vertices, matAdj, arestas, true);
+		Grafo grafoRotulado = new Grafo(vertices, matAdj, arestas, true, false);
 		
 		return grafoRotulado;
 	}

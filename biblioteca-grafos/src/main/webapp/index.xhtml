@@ -6,45 +6,23 @@
 
 <h:head>
 	<title>bibliotecas grafos</title>
+	<link rel="stylesheet" href="resources/css/site.css"></link>
 </h:head>
 
 <h:body>
-
+	<div id="principal">
 	<h1>Biblioteca Grafos</h1>
 
 	<h:form enctype="multipart/form-data">
 		<p:fileUpload value="#{UploadDeArquivo.arquivo}" mode="simple"></p:fileUpload>
 		<p:separator />
 		<h:commandButton value="Enviar"
-			actionListener="#{UploadDeArquivo.fazerUpload}" ajax="false">
-			<f:setPropertyActionListener
-				value="#{UploadDeArquivo.controleSaida.distancia}"
-				target="#{ControladorSaida.distancia}"></f:setPropertyActionListener>
-
-			<f:setPropertyActionListener
-				value="#{UploadDeArquivo.controleSaida.buscaPorLargura}"
-				target="#{ControladorSaida.buscaPorLargura}"></f:setPropertyActionListener>
-
-			<f:setPropertyActionListener
-				value="#{UploadDeArquivo.controleSaida.buscaPorProfundidade}"
-				target="#{ControladorSaida.buscaPorProfundidade}"></f:setPropertyActionListener>
-		
-		<f:setPropertyActionListener
-				value="#{UploadDeArquivo.controleSaida.menorCaminho}"
-				target="#{ControladorSaida.menorCaminho}"></f:setPropertyActionListener>
-		
-		<f:setPropertyActionListener
-				value="#{UploadDeArquivo.controleSaida.prim}"
-				target="#{ControladorSaida.prim}"></f:setPropertyActionListener>
-		
-		<f:setPropertyActionListener
-				value="#{UploadDeArquivo.controleSaida.kruskal}"
-				target="#{ControladorSaida.kruskal}"></f:setPropertyActionListener>
-		
+			action="#{UploadDeArquivo.fazerUpload}" ajax="false" allowTypes="/(\.|\/)(txt)$/">
+			
 		</h:commandButton>
 	</h:form>
 
-
+	</div>
 </h:body>
 
 </html>

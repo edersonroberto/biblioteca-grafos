@@ -21,10 +21,6 @@ public class ControladorPrincipal {
 	private ControladorSaida controladorSaida;
 
 	
-	public void onload(){
-		controlaFluxo("c:\\saida\\arquivo.txt");
-	}
-	
 	public boolean controlaFluxo(String arquivo){
 		
 		ControladorGrafo controlarGrafo = new ControladorGrafo();
@@ -36,7 +32,7 @@ public class ControladorPrincipal {
 		if(linhas != null){
 			
 			grafo = controlarGrafo.montaGrafo(linhas);
-			CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal");
+			CriaGrafoSaida.CriarSaidaGrafo(grafo, "principal", null);
 			controladorDeComandos.executaComandos(grafo, linhas, controladorSaida);
 			return true;
 		}

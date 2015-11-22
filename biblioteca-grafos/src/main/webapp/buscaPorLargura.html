@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-	<script type="text/javascript" src="resources/js/menu.js"></script>
-	<link rel="stylesheet" href="resources/css/menu.css"></link>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/arbor.js"></script>
+<script type="text/javascript" src="resources/js/graphics.js"></script>
+<script type="text/javascript" src="resources/js/renderer.js"></script>
+<script type="text/javascript" src="resources/js/menu.js"></script>
+<link rel="stylesheet" href="resources/css/site.css"></link>
 </head>
 <body>
 
@@ -14,7 +22,8 @@
 				<li><a href="saidaGrafoPrincipal.html">Principal</a></li>
 				<li><a href="distanciaI.html">Distancia I</a></li>
 				<li><a href="distanciaII.html">Distancia II</a></li>
-				<li><a href="buscaPorProfundidade.html">Busca PorProfundidade</a></li>
+				<li><a href="buscaPorProfundidade.html">Busca
+						PorProfundidade</a></li>
 				<li><a href="dijkstra.html">Dijkstra</a></li>
 				<li><a href="prim.html">Prim</a></li>
 				<li><a href="kruskal.html">Kruskal</a></li>
@@ -22,5 +31,11 @@
 		</div>
 	</div>
 
+	<div>	<canvas id="viewport" width="600" height="600"></canvas>
+	<script src="c:/saida/js/buscaPorLargura.js"></script></div>
+ 
+	<iframe src="c:/saida/html/buscaPorLargura.html" height="400"
+		style="position: absolute; left: 70%; top: 20%;"></iframe>
+	 
 </body>
 </html>

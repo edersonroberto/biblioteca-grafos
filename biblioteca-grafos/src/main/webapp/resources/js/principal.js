@@ -1,69 +1,15 @@
-var sys = arbor.ParticleSystem(1000, 400, 1);
-sys.parameters({
-	gravity : true
-});
+var sys = arbor.ParticleSystem(1000, 400,1);
+sys.parameters({gravity:true});
 sys.renderer = Renderer("#viewport");
-var A = sys.addNode('A', {
-	'color' : 'red',
-	'shape' : 'dot',
-	'label' : 'A'
-});
-var B = sys.addNode('B', {
-	'color' : 'red',
-	'shape' : 'dot',
-	'label' : 'B'
-});
-var C = sys.addNode('C', {
-	'color' : 'red',
-	'shape' : 'dot',
-	'label' : 'C'
-});
-var D = sys.addNode('D', {
-	'color' : 'red',
-	'shape' : 'dot',
-	'label' : 'D'
-});
-var E = sys.addNode('E', {
-	'color' : 'red',
-	'shape' : 'dot',
-	'label' : 'E'
-});
-sys.addEdge('A', 'B', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('A', 'C', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('B', 'A', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('B', 'C', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('C', 'A', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('C', 'B', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('C', 'D', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('D', 'C', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('D', 'E', {
-	'color' : 'blue',
-	'weight' : 1
-});
-sys.addEdge('E', 'D', {'color' : 'blue','weight' : 1});
-
-
+var a0= sys.addNode('a0', {'color':'red','shape':'dot','label':'0'});
+var a1= sys.addNode('a1', {'color':'red','shape':'dot','label':'1'});
+var a2= sys.addNode('a2', {'color':'red','shape':'dot','label':'2'});
+var a3= sys.addNode('a3', {'color':'red','shape':'dot','label':'3'});
+var a4= sys.addNode('a4', {'color':'red','shape':'dot','label':'4'});
+sys.addEdge('a0', 'a1',{'color':'blue', 'weight':5});
+sys.addEdge('a0', 'a2',{'color':'blue', 'weight':10});
+sys.addEdge('a1', 'a2',{'color':'blue', 'weight':5});
+sys.addEdge('a1', 'a3',{'color':'blue', 'weight':6});
+sys.addEdge('a2', 'a0',{'color':'blue', 'weight':10});
+sys.addEdge('a2', 'a3',{'color':'blue', 'weight':6});
+sys.addEdge('a3', 'a0',{'color':'blue', 'weight':7});

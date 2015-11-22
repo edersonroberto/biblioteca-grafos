@@ -13,12 +13,12 @@
 </h:head>
 
 <h:body>
-
+	 
 	<h:form>
 		<p:remoteCommand name="onload" action="#{ControladorPrincipal.onload}"
 			autoRun="true" />
 	</h:form>
-
+	
 	<p:layout style="min-width:600px;min-height:600px;">
 		<p:layoutUnit position="east" resizable="true" size="300"
 			minSize="100" maxSize="400">
@@ -73,7 +73,8 @@
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
-        	Center      	
+        	<canvas id="viewport" width="800" height="600"></canvas>
+			<script src="resources/js/principal.js"></script> 	
     	</p:layoutUnit>
 	</p:layout>
 

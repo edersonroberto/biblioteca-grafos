@@ -33,6 +33,9 @@ public class Dijkstra {
 			while(!naoVisitados.isEmpty() && !verticeAtual.equals(destino)){
 				naoVisitados.remove(verticeAtual);
 				verticeAtual = operacaoPrincipal(verticeAtual);
+				
+				if(verticeAtual == null)
+					verticeAtual = defineNovoVertice();
 			}
 			
 			caminho += defineRotaMenorCaminho(origem, destino);
@@ -45,6 +48,11 @@ public class Dijkstra {
 		return caminho + "\n";
 	}
 	
+	private String defineNovoVertice() {
+		
+		return naoVisitados.get(0);
+	}
+
 	private String defineRotaMenorCaminho(String origem, String destino) {
 		
 		String vertice = "", rota = "";

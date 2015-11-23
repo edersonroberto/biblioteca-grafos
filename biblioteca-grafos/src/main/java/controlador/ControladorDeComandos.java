@@ -18,7 +18,7 @@ public class ControladorDeComandos {
 	private ArquivoDeSaida arquivoSaida;
 	private int contDistancia ;
 	
-	public void executaComandos(Grafo grafo, List<String> linhas, ControladorSaida controleSaida, String diretorio) {
+	public void executaComandos(Grafo grafo, List<String> linhas, String diretorio) {
 		
 		contDistancia = 1;
 		arquivoSaida = new ArquivoDeSaida("C:/saida/");
@@ -29,13 +29,13 @@ public class ControladorDeComandos {
 
 		for (String linha : linhas) {
 			caracteres = trataLinha.trataLinha(linha);
-			executaComandos(caracteres, controleSaida, diretorio);
+			executaComandos(caracteres, diretorio);
 		}
 		
 
 	}
 
-	private void executaComandos(String[] caracteres, ControladorSaida controleSaida, String diretorio) {
+	private void executaComandos(String[] caracteres, String diretorio) {
 		String resultado = "";
 
 		String comando = caracteres[0].toLowerCase();
@@ -45,7 +45,6 @@ public class ControladorDeComandos {
 				System.out.println("Executando calculo da distancia...");
 				Distancia distancia = new Distancia();
 				resultado = distancia.calculaDistancia(grafo, caracteres);
-				controleSaida.setDistancia(resultado);
 				System.out.println("Salvando grafo com o da distancia...");
 				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio,"distancia"+contDistancia, resultado);
 				CriaGrafoSaida.geraHtml(resultado, diretorio, "\\distancia"+contDistancia);
@@ -57,7 +56,6 @@ public class ControladorDeComandos {
 				System.out.println("Executando busca em profundidade");
 				Busca buscaProfundidade = new Busca();
 				resultado = buscaProfundidade.buscaPorProfundidade(grafo, caracteres[1], caracteres[2]);
-				controleSaida.setBuscaPorProfundidade(resultado);
 				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "buscaPorProfundidade", resultado);
 				CriaGrafoSaida.geraHtml(resultado, diretorio, "buscaPorProfundidade");
 				
@@ -66,7 +64,6 @@ public class ControladorDeComandos {
 				System.out.println("Executando busca em largura");
 				Busca buscaLargura = new Busca();
 				resultado = buscaLargura.buscaPorLargura(grafo, caracteres[1], caracteres[2]);
-				controleSaida.setBuscaPorLargura(resultado);
 				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "buscaPorLargura", resultado);
 				CriaGrafoSaida.geraHtml(resultado,diretorio, "buscaPorLargura");
 				
@@ -75,7 +72,6 @@ public class ControladorDeComandos {
 				System.out.println("Executando calculo do menor caminho");
 				Dijkstra dijkstra = new Dijkstra();
 				resultado = dijkstra.menorCaminho(grafo, caracteres[2], caracteres[3]);
-				controleSaida.setMenorCaminho(resultado);
 				CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "dijkstra", resultado);
 				CriaGrafoSaida.geraHtml(resultado,diretorio,  "dijkstra");
 				break;
@@ -83,7 +79,6 @@ public class ControladorDeComandos {
 				System.out.println("Executando algoritmo de prim");
 				Prim prim = new Prim();
 				resultado = prim.arvoreGeradoraMinima(grafo, caracteres[1]);
-				controleSaida.setPrim(resultado);
 				CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "prim", resultado);
 				CriaGrafoSaida.geraHtml(resultado,diretorio, "prim");
 				break;
@@ -91,7 +86,6 @@ public class ControladorDeComandos {
 				System.out.println("Executando algoritmo de kruskal");
 				Kruskal kruskal = new Kruskal();
 				resultado = kruskal.arvoreGeradoraMinima(grafo);
-				controleSaida.setKruskal(resultado);
 				CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "kruskal", resultado);
 				CriaGrafoSaida.geraHtml(resultado,diretorio, "kruskal");
 				

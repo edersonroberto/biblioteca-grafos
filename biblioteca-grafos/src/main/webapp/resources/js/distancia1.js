@@ -7,7 +7,7 @@ var a2= sys.addNode('a2', {'color':'blue','shape':'dot','label':'2'});
 var a3= sys.addNode('a3', {'color':'blue','shape':'dot','label':'3'});
 var a4= sys.addNode('a4', {'color':'blue','shape':'dot','label':'4'});
 var a5= sys.addNode('a5', {'color':'blue','shape':'dot','label':'5'});
-sys.addEdge('a0', 'a1',{'color':'black', 'weight':10});
+sys.addEdge('a0', 'a1',{'color':'red', 'weight':10});
 sys.addEdge('a0', 'a2',{'color':'black', 'weight':20});
 sys.addEdge('a1', 'a2',{'color':'black', 'weight':11});
 sys.addEdge('a1', 'a3',{'color':'black', 'weight':13});

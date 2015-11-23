@@ -11,18 +11,15 @@ import org.junit.Test;
 public class TesteArquivoDeEntrada {
 
 	@Test
-	public void TestaArquivoDeEntrada() {
+	public void TestaArquivoDeEntrada() throws IOException {
 
 		String camArquivo = "arquivo.txt";
 		List<String> arquivoRetornado = new ArrayList<String>();
 
 		ArquivoDeEntrada arqEntrada = new ArquivoDeEntrada();
-		try {
-			arquivoRetornado = arqEntrada.trataArquivoDeEntrada(camArquivo);
-		} catch (IOException e) {
 
-			e.printStackTrace();
-		}
+		arquivoRetornado = arqEntrada.trataArquivoDeEntrada(camArquivo);
+
 		assertEquals(22, arquivoRetornado.size());
 
 	}
@@ -35,12 +32,12 @@ public class TesteArquivoDeEntrada {
 		arqEntrada.trataArquivoDeEntrada("nao existe.txt");
 
 	}
-	
+
 	@Test
 	public void TestaArquivoDeEntradaVazio() throws IOException {
 		ArquivoDeEntrada arqEntrada = new ArquivoDeEntrada();
 		List<String> arquivoRetornado = new ArrayList<String>();
-		
+
 		arquivoRetornado = arqEntrada.trataArquivoDeEntrada("arquivoVazio.txt");
 		assertEquals(null, arquivoRetornado);
 	}

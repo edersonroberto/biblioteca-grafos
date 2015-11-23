@@ -1,7 +1,5 @@
 package utilitario;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 
 import biblioteca.Grafo;
@@ -33,7 +31,8 @@ public class CriaGrafoSaida {
 		
 		diretorio += "js/" +nome + ".js"; 
 		
-		gravaSaida(diretorio, arquivo);
+		GravaSaida.gravarSaida(diretorio, arquivo);
+		
 	}
 
 	// Cria os vertices do grafo
@@ -90,9 +89,10 @@ public class CriaGrafoSaida {
 				return verificaNoResultadoBusca(resultado, vertices, i, j);
 			case "buscaPorProfundidade":
 				return verificaNoResultadoBusca(resultado, vertices, i, j);
+			default:
+				return false;
 		}
 		
-		return false;
 	}
 
 	private static boolean verificaNoResultadoPrimOuKruskal(String resultado,
@@ -157,21 +157,6 @@ public class CriaGrafoSaida {
 		
 	}
 
-	private static void gravaSaida(String diretorio, String arquivo) {
-
-		try {
-			
-			FileWriter fw = new FileWriter(diretorio);
-			System.out.println(diretorio);
-			fw.write(arquivo);
-			fw.close();
-			System.out.println("Arquivo salvo com sucesso!");
-		} catch (IOException e) {
-			System.out.println(e.getMessage() + "Erro ao salvar arquivo.");
-		}
-
-	}
-
 	public static void geraHtml(String resultado,String diretorio, String nomeArquivo) {
 		
 		
@@ -179,7 +164,7 @@ public class CriaGrafoSaida {
 		String saidaHtml = "<p>"+ resultado + "</p>";
 		diretorio += "html/" + nomeArquivo + ".html";
 		
-		gravaSaida(diretorio, saidaHtml);
+		GravaSaida.gravarSaida(diretorio, saidaHtml);
 		
 	}
 

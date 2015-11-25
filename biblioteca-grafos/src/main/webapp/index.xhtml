@@ -17,7 +17,7 @@
 		<p:fileUpload value="#{UploadDeArquivo.arquivo}" mode="simple"></p:fileUpload>
 		<p:separator />
 		<h:commandButton value="Enviar"
-			action="#{UploadDeArquivo.fazerUpload}" ajax="false" allowTypes="/(\.|\/)(txt)$/">
+			actionListener="#{UploadDeArquivo.fazerUpload}" ajax="false" allowTypes="/(\.|\/)(txt)$/">
 			
 		</h:commandButton>
 	</h:form>

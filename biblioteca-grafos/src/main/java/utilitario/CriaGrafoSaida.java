@@ -8,39 +8,46 @@ public class CriaGrafoSaida {
 
 	private static List<String> vertices;
 	private static int matAdj[][];
-	private static String arquivo;
+
 
 	// Essa classe é utilizada para criar o arquivo que será chamado na página
 	// html com os dados do grafo.
-	public static void CriarSaidaGrafo(Grafo grafo, String diretorio, String nome, String resultado) {
+	public static boolean CriarSaidaGrafo(Grafo grafo, String diretorio, String nome, String resultado) {
 		vertices = grafo.getVertices();
 		matAdj = grafo.getMatAdj();
+		String arquivo;
 		System.out.println("Gerando Plotagem do Grafo...");
-
-		String viewport = "\"#viewport\"";
-		String corAresta = "'black'";
-
-		arquivo = "var sys = arbor.ParticleSystem(1000, 400,1);\n"
-				+ "sys.parameters({gravity:true});\n"
-				+ "sys.renderer = Renderer(" + viewport + ");\n";
-
 		
+		arquivo = montaInicioDoGrafo();
+				
 		criaOsVerticesDoGrafo();
 	
-		criaAsArestasDoGrafo(corAresta, nome, resultado);
+		criaAsArestasDoGrafo(nome, resultado);
 		
 		diretorio += "js/" +nome + ".js"; 
 		
-		GravaSaida.gravarSaida(diretorio, arquivo);
+		boolean gravadoComSucesso = GravaSaida.gravarSaida(diretorio, arquivo);
 		
+		return gravadoComSucesso;
+		
+	}
+
+	private static String montaInicioDoGrafo() {
+		
+		String viewport = "\"#viewport\"";
+		
+		String arquivo = "var sys = arbor.ParticleSystem(1000, 400,1);\n"
+				+ "sys.parameters({gravity:true});\n"
+				+ "sys.renderer = Renderer(" + viewport + ");\n";
+		return arquivo;
 	}
 
 	// Cria os vertices do grafo
 	private static void criaOsVerticesDoGrafo() {
-				
+		String arquivo = "";		
 		for (int i = 0; i < vertices.size(); i++) {
 			String atributosVertice = "'a" + vertices.get(i) + "', {"
-					+ "'color':'blue','shape':'dot','label':'" + vertices.get(i)
+					+ "'color':'black','label':'" + vertices.get(i)
 					+ "'" + "});";
 			arquivo += "var a" + vertices.get(i) + "= sys.addNode("
 					+ atributosVertice + "\n";
@@ -49,8 +56,11 @@ public class CriaGrafoSaida {
 	}
 	
 	// Cria as arestas do grafo
-	private static void criaAsArestasDoGrafo(String corAresta, String nome, String resultado) {
-
+	private static String criaAsArestasDoGrafo(String nome, String resultado) {
+		
+		String corAresta = "'green'";
+		String arquivo = "";
+		
 		for (int i = 0; i < vertices.size(); i++) {
 			for (int j = 0; j < vertices.size(); j++) {
 				if (matAdj[i][j] != 0) {
@@ -63,11 +73,13 @@ public class CriaGrafoSaida {
 							+ vertices.get(j) + "',{'color':" + corAresta
 							+ ", 'weight':" + matAdj[i][j] + "});\n";
 					
-					corAresta = "'black'";
+					corAresta = "'green'";
 				}
 			}
 		}
-
+		
+		return arquivo;
+		
 	}
 	
 

@@ -4,14 +4,10 @@ import java.util.List;
 
 public class Distancia {
 	
-	private List<String> vertices;
-	private int matAdj[][];
  	private List<Aresta> arestas;
 	
 	public String calculaDistancia(Grafo grafo, String caminho[]){
 		
-		vertices = grafo.getVertices();
-		matAdj = grafo.getMatAdj();
 		arestas = grafo.getArestas();
 		
 		int distancia = 0;

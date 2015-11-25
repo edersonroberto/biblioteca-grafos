@@ -2,8 +2,6 @@ package utilitario;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Test;
 
 import biblioteca.Grafo;
@@ -16,15 +14,17 @@ public class TesteCriaGrafoSaida {
 		
 		Grafo grafo = GrafoParaTeste.criaGrafoRotulado();
 		String diretorio = "C:/saida/";
-		CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "principal", null);
+		assertEquals(true, CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "principal", null));
 		
 	}
 	
 	@Test
-	public void testaCriarSaidaGrafoComErro(){
+	public void testaCriarSaidaGrafoComArquivoSemDados(){
 		
-		assertEquals(false, GravaSaida.gravarSaida("vazio", "teste"));
-		
-		
+		Grafo grafo = GrafoParaTeste.criaGrafoSimples();
+		String diretorio = "G:/naoExistte/";
+		assertEquals(false, CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "Vazio", null));
 	}
+	
+
 }

@@ -18,7 +18,18 @@ public class TestaDijkstra {
 		
 	}
 	
-
+	
+	@Test
+	public void testeMenorCaminho2(){
+		
+		grafo = GrafoParaTeste.criaGrafoRotulado();
+		String esperado = "Menor Caminho A E:\n"
+				+"A C D E\n3\n";
+			
+		assertEquals(esperado, dijkstra.menorCaminho(grafo,"A", "E"));
+		
+	}
+	
 	@Test
 	public void testeMenorCaminho(){
 		String esperado = "Menor Caminho 0 4:\n"

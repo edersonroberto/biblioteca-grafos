@@ -10,8 +10,6 @@ public class GravaSaida {
 		try {
 			FileWriter fw = new FileWriter(diretorio);
 			
-			if(arquivo.length() <= 0)
-				throw new RuntimeException("Não foi possível realizar gravação - Verifique se o arquivo contém dados");
 			fw.write(arquivo);
 			fw.close();
 			System.out.println("Arquivo salvo com sucesso!");

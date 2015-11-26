@@ -4,14 +4,16 @@ import java.util.List;
 
 public class VerificaResultado {
 	
-	public boolean verificaNoResultadoDaDistancia(String resultado,
-			List<String> vertices2, int i, int j, List<String> vertices) {
+	public boolean verificaNoResultadoDaDistancia(String resultado, int i, int j, List<String> vertices) {
 		resultado = resultado.replace(":", "");
 		String resultados []= TrataLinha.trataLinha(resultado);
 		
 		
-		for(int ii=1; ii< resultados.length-1; ii++){
-			if(vertices.get(i).equals(resultados[ii]) && (vertices.get(j).equals(resultados[ii+1]))){
+		for(int k=1; k< resultados.length; k++){
+			if(vertices.get(i).equals(resultados[k]) && (vertices.get(j).equals(resultados[k+1]))){
+				return true;
+			}
+			if(vertices.get(j).equals(resultados[k]) && (vertices.get(i).equals(resultados[k+1]))){
 				return true;
 			}
 		}

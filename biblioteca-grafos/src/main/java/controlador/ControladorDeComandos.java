@@ -24,11 +24,10 @@ public class ControladorDeComandos {
 		arquivoSaida = new ArquivoDeSaida("C:/saida/");
 		String caracteres[];
 		this.grafo = grafo;
-		TrataLinha trataLinha = new TrataLinha();
 		linhas.remove("Comandos");
 
 		for (String linha : linhas) {
-			caracteres = trataLinha.trataLinha(linha);
+			caracteres = TrataLinha.trataLinha(linha);
 			executaComandos(caracteres, diretorio);
 		}
 		
@@ -47,7 +46,7 @@ public class ControladorDeComandos {
 				resultado = distancia.calculaDistancia(grafo, caracteres);
 				System.out.println("Salvando grafo com o da distancia...");
 				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio,"distancia"+contDistancia, resultado);
-				CriaGrafoSaida.geraHtml(resultado, diretorio, "\\distancia"+contDistancia);
+				CriaGrafoSaida.geraHtml(resultado, diretorio, "distancia"+contDistancia);
 				contDistancia++;
 				
 				

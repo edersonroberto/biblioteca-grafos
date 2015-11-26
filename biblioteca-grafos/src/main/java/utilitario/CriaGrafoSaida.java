@@ -72,13 +72,14 @@ public class CriaGrafoSaida {
 					if (resultado != null) {
 						if (arestaDeveTrocarCor(nome, i, j, resultado))
 							corAresta = "'red'";
+						else
+							corAresta = "'green'";
 					}
 
 					arquivo += "sys.addEdge('a" + vertices.get(i) + "', 'a"
 							+ vertices.get(j) + "',{'color':" + corAresta
 							+ ", 'weight':" + matAdj[i][j] / divisor + "});\n";
 
-					corAresta = "'green'";
 				}
 			}
 		}
@@ -104,40 +105,53 @@ public class CriaGrafoSaida {
 		return 1;
 	}
 
-	private static boolean arestaDeveTrocarCor(String funcao, int i, int j, String resultado) {
+	private static boolean arestaDeveTrocarCor(String funcao, int i, int j,
+			String resultado) {
 
 		switch (funcao) {
 		case "distancia1":
 			return verificaResultado.verificaNoResultadoDaDistancia(resultado,
-					vertices, i, j, vertices);
+					i, j, vertices);
 		case "distancia2":
 			return verificaResultado.verificaNoResultadoDaDistancia(resultado,
-					vertices, i, j, vertices);
+					i, j, vertices);
 		case "dijkstra":
-			return verificaResultado.verificaNoResultadoDijkstra(vertices, resultado, i, j);
+			return verificaResultado.verificaNoResultadoDijkstra(vertices,
+					resultado, i, j);
 		case "prim":
-			return verificaResultado.verificaNoResultadoPrimOuKruskal(resultado, vertices, i, j);
+			return verificaResultado.verificaNoResultadoPrimOuKruskal(
+					resultado, vertices, i, j);
 		case "kruskal":
-			return verificaResultado.verificaNoResultadoPrimOuKruskal(resultado, vertices, i, j);
+			return verificaResultado.verificaNoResultadoPrimOuKruskal(
+					resultado, vertices, i, j);
 		case "buscaPorLargura":
-			return verificaResultado.verificaNoResultadoBusca(resultado, vertices, i, j);
+			return verificaResultado.verificaNoResultadoBusca(resultado,
+					vertices, i, j);
 		case "buscaPorProfundidade":
-			return verificaResultado.verificaNoResultadoBusca(resultado, vertices, i, j);
+			return verificaResultado.verificaNoResultadoBusca(resultado,
+					vertices, i, j);
 		default:
 			return false;
 		}
 
 	}
 
-	
 	public static void geraHtml(String resultado, String diretorio,
 			String nomeArquivo) {
+		String saidaHtml = "<body bgcolor ='A2F0E7'  text ='red' >";
+		String resultados[] = resultado.split("\n");
 
-		resultado = resultado.replace("\n", "</p>\n<p>");
-		String saidaHtml = "<p>" + resultado + "</p>";
+		saidaHtml += "<ol><b><u><li > " + resultados[0] + "</li></u></b> </ol>";
+		saidaHtml += "<ul><i>\n";
+		for (int i = 1; i < resultados.length; i++) {
+			saidaHtml += "<p>" + resultados[i] + "</p>\n";
+		}
+		saidaHtml += "</i><ul>\n";
+		saidaHtml += "</body>";
+
 		diretorio += "html/" + nomeArquivo + ".html";
 
-		GravaSaida.gravarSaida(diretorio, saidaHtml);
+		GravaSaida.gravarSaida(saidaHtml, diretorio);
 
 	}
 

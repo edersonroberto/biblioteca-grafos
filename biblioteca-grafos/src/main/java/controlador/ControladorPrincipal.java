@@ -18,7 +18,7 @@ public class ControladorPrincipal {
 	private Grafo grafo;
 	private List<String> linhas ;
 	private ArquivoDeEntrada arqEntrada;
-
+	private String saidaGrafo;
 	
 	public boolean controlaFluxo(String diretorioLido, String diretorioAserSalvo){
 		
@@ -31,8 +31,8 @@ public class ControladorPrincipal {
 		if(linhas != null){
 			
 			grafo = controlarGrafo.montaGrafo(linhas);
-			CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorioAserSalvo, "principal", null);
-			controladorDeComandos.executaComandos(grafo, linhas,diretorioAserSalvo);
+			saidaGrafo = CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorioAserSalvo, "principal", null);
+			controladorDeComandos.executaComandos(grafo, linhas,diretorioAserSalvo, saidaGrafo);
 			return true;
 		}
 		

@@ -4,36 +4,70 @@ import java.util.List;
 
 public class VerificaResultado {
 	
-	public boolean verificaNoResultadoDaDistancia(String resultado, int i, int j, List<String> vertices) {
-		resultado = resultado.replace(":", "");
-		String resultados []= TrataLinha.trataLinha(resultado);
+	public static String verificaNoResultadoDaDistancia(String resultado, String saidaGrafo) {
+		String saidaComando = saidaGrafo;
 		
-		
-		for(int k=1; k< resultados.length; k++){
-			if(vertices.get(i).equals(resultados[k]) && (vertices.get(j).equals(resultados[k+1]))){
-				return true;
-			}
-			if(vertices.get(j).equals(resultados[k]) && (vertices.get(i).equals(resultados[k+1]))){
-				return true;
-			}
+		VerificaResultado.verificaNoResultadoDaDistancia(resultado, saidaGrafo );
+		String resultDis2[] = resultado.split(" ");
+
+		for (int i = 0; i < resultDis2.length - 1; i++) {
+			saidaComando = trocaCorVertice(resultDis2[i + 1], saidaComando);
+			saidaComando = trocaCorAresta(resultDis2[i], resultDis2[i + 1],
+					saidaComando);
 		}
 		
-		return false;
-		
+		return saidaComando;
 	}
 	
-	public boolean verificaNoResultadoDijkstra(List<String> vertices, String resultado, int i, int j) {
+	private static String trocaCorAresta(String vertice1, String vertice2,
+			String saidaResultado) {
+
+		String saidasGrafo[] = saidaResultado.split("\n");
+		String saida = "";
+
+		for (int i = 0; i < saidasGrafo.length; i++) {
+
+			if (saidasGrafo[i].contains("addEdge")) {
+				if (saidasGrafo[i].contains(vertice1)
+						&& saidasGrafo[i].contains(vertice2))
+					saidasGrafo[i] = saidasGrafo[i].replace("green", "red");
+			}
+			saida += saidasGrafo[i] + "\n";
+		}
+
+		return saida;
+
+	}
+
+	private static String trocaCorVertice(String vertice, String saidaGrafo) {
+		String saidasGrafo[] = saidaGrafo.split("\n");
+		String saida = "";
+
+		for (int i = 0; i < saidasGrafo.length; i++) {
+
+			if (saidasGrafo[i].contains("addNode")) {
+				if (saidasGrafo[i].contains(vertice))
+					saidasGrafo[i] = saidasGrafo[i].replace("green", "red");
+			}
+			saida += saidasGrafo[i] + "\n";
+		}
+
+		return saida;
+
+	}
+	
+	public static String verificaNoResultadoDijkstra(List<String> vertices, String resultado, int i, int j) {
 
 		String resultados[] = resultado.split(" ");
 		for (int ii = 0; ii < resultados.length - 2; ii++) {
 			if (vertices.get(ii + 1).equals(resultados[ii])
 					&& (vertices.get(j).equals(resultados[ii + 1]))) {
-				return true;
+				return null;
 			}
 
 		}
 
-		return false;
+		return null;
 	}
 	
 	public boolean verificaNoResultadoPrimOuKruskal(String resultado,
@@ -50,21 +84,13 @@ public class VerificaResultado {
 		return false;
 	}
 	
-	public boolean verificaNoResultadoBusca(String resultado,
-			List<String> vertices, int i, int j) {
+	public static String verificaNoResultadoBusca(String resultado,
+			String saidaGrafo) {
 		String resultados[] = resultado.split("\n");
 
-		for (int ii = 1; ii < resultados.length - 2; ii++) {
-			if (resultados[ii].contains("foi visitado")) {
-				if (resultados[ii].contains(vertices.get(i))) {
-					if (resultados[ii + 2].contains(vertices.get(j)))
-						return true;
-				}
+		
 
-			}
-		}
-
-		return false;
+		return null;
 	}
 
 }

@@ -8,13 +8,12 @@ public class CriaGrafoSaida {
 
 	private static List<String> vertices;
 	private static int matAdj[][];
-	private static VerificaResultado verificaResultado;
 
 	// Essa classe é utilizada para criar o arquivo que será chamado na página
 	// html com os dados do grafo.
-	public static boolean CriarSaidaGrafo(Grafo grafo, String diretorio,
+	public static String CriarSaidaGrafo(Grafo grafo, String diretorio,
 			String nome, String resultado) {
-		verificaResultado = new VerificaResultado();
+
 		vertices = grafo.getVertices();
 		matAdj = grafo.getMatAdj();
 		String arquivo;
@@ -30,8 +29,10 @@ public class CriaGrafoSaida {
 
 		boolean gravadoComSucesso = GravaSaida.gravarSaida(arquivo, diretorio);
 
-		return gravadoComSucesso;
-
+		if (gravadoComSucesso)
+			return arquivo;
+		else
+			return "";
 	}
 
 	private static String montaInicioDoGrafo() {
@@ -49,7 +50,7 @@ public class CriaGrafoSaida {
 		String arquivo = "";
 		for (int i = 0; i < vertices.size(); i++) {
 			String atributosVertice = "'a" + vertices.get(i) + "', {"
-					+ "'color':'black','label':'" + vertices.get(i) + "'"
+					+ "'color':'green','label':'" + vertices.get(i) + "'"
 					+ "});";
 			arquivo += "var a" + vertices.get(i) + "= sys.addNode("
 					+ atributosVertice + "\n";
@@ -61,7 +62,6 @@ public class CriaGrafoSaida {
 	// Cria as arestas do grafo
 	private static String criaAsArestasDoGrafo(String nome, String resultado) {
 
-		String corAresta = "'green'";
 		String arquivo = "";
 		// Usado para fazer com que as arestas não fiquem muito grande no grafo
 		int divisor = defineDivisorDasArestas();
@@ -69,15 +69,8 @@ public class CriaGrafoSaida {
 		for (int i = 0; i < vertices.size(); i++) {
 			for (int j = 0; j < vertices.size(); j++) {
 				if (matAdj[i][j] != 0) {
-					if (resultado != null) {
-						if (arestaDeveTrocarCor(nome, i, j, resultado))
-							corAresta = "'red'";
-						else
-							corAresta = "'green'";
-					}
-
 					arquivo += "sys.addEdge('a" + vertices.get(i) + "', 'a"
-							+ vertices.get(j) + "',{'color':" + corAresta
+							+ vertices.get(j) + "',{'color':'green'"
 							+ ", 'weight':" + matAdj[i][j] / divisor + "});\n";
 
 				}
@@ -105,37 +98,6 @@ public class CriaGrafoSaida {
 		return 1;
 	}
 
-	private static boolean arestaDeveTrocarCor(String funcao, int i, int j,
-			String resultado) {
-
-		switch (funcao) {
-		case "distancia1":
-			return verificaResultado.verificaNoResultadoDaDistancia(resultado,
-					i, j, vertices);
-		case "distancia2":
-			return verificaResultado.verificaNoResultadoDaDistancia(resultado,
-					i, j, vertices);
-		case "dijkstra":
-			return verificaResultado.verificaNoResultadoDijkstra(vertices,
-					resultado, i, j);
-		case "prim":
-			return verificaResultado.verificaNoResultadoPrimOuKruskal(
-					resultado, vertices, i, j);
-		case "kruskal":
-			return verificaResultado.verificaNoResultadoPrimOuKruskal(
-					resultado, vertices, i, j);
-		case "buscaPorLargura":
-			return verificaResultado.verificaNoResultadoBusca(resultado,
-					vertices, i, j);
-		case "buscaPorProfundidade":
-			return verificaResultado.verificaNoResultadoBusca(resultado,
-					vertices, i, j);
-		default:
-			return false;
-		}
-
-	}
-
 	public static void geraHtml(String resultado, String diretorio,
 			String nomeArquivo) {
 		String saidaHtml = "<body bgcolor ='A2F0E7'  text ='red' >";
@@ -155,4 +117,25 @@ public class CriaGrafoSaida {
 
 	}
 
+	public static void CriarGrafoResultado(String diretorio, String funcao,
+			String resultado, String saidaGrafo) {
+
+		String saidaComando = "";
+		
+		diretorio += "js/" + funcao + ".js";
+		switch (funcao) {
+		case "distancia1": case "distancia2":
+			
+			saidaComando = VerificaResultado.verificaNoResultadoDaDistancia(resultado, saidaGrafo );
+		
+			GravaSaida.gravarSaida(saidaComando, diretorio);
+		
+		case "buscaPorProfundidade": case "buscaPorLargura":
+			saidaComando = VerificaResultado.verificaNoResultadoBusca(resultado, saidaGrafo);
+			GravaSaida.gravarSaida(saidaComando, diretorio);
+			
+		default: return;
+		
+		}
+	}
 }

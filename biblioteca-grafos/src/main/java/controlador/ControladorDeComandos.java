@@ -54,7 +54,7 @@ public class ControladorDeComandos {
 				System.out.println("Executando busca em profundidade");
 				Busca buscaProfundidade = new Busca();
 				resultado = buscaProfundidade.buscaPorProfundidade(grafo, caracteres[1], caracteres[2]);
-				CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "buscaPorProfundidade", resultado);
+				CriaGrafoSaida.CriarGrafoResultado(diretorio, "buscaPorProfundidade", resultado, saidaGrafo);
 				CriaGrafoSaida.geraHtml(resultado, diretorio, "buscaPorProfundidade");
 				
 				break;
@@ -62,7 +62,7 @@ public class ControladorDeComandos {
 				System.out.println("Executando busca em largura");
 				Busca buscaLargura = new Busca();
 				resultado = buscaLargura.buscaPorLargura(grafo, caracteres[1], caracteres[2]);
-				//CriaGrafoSaida.CriarSaidaGrafo(grafo, diretorio, "buscaPorLargura", resultado);
+				CriaGrafoSaida.CriarGrafoResultado(diretorio, "buscaPorLargura", resultado, saidaGrafo);
 				CriaGrafoSaida.geraHtml(resultado,diretorio, "buscaPorLargura");
 				
 				break;
@@ -70,21 +70,21 @@ public class ControladorDeComandos {
 				System.out.println("Executando calculo do menor caminho");
 				Dijkstra dijkstra = new Dijkstra();
 				resultado = dijkstra.menorCaminho(grafo, caracteres[2], caracteres[3]);
-				//CriaGrafoSaida.CriarGrafoResultado(diretorio, "dijkstra", resultado, saidaGrafo);
+				CriaGrafoSaida.CriarGrafoResultado(diretorio, "dijkstra", resultado, saidaGrafo);
 				CriaGrafoSaida.geraHtml(resultado,diretorio,  "dijkstra");
 				break;
 			case "prim":
 				System.out.println("Executando algoritmo de prim");
 				Prim prim = new Prim();
 				resultado = prim.arvoreGeradoraMinima(grafo, caracteres[1]);
-				//CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "prim", resultado);
+				CriaGrafoSaida.CriarGrafoResultado(diretorio, "prim", resultado, saidaGrafo);
 				CriaGrafoSaida.geraHtml(resultado,diretorio, "prim");
 				break;
 			case "kruskal":
 				System.out.println("Executando algoritmo de kruskal");
 				Kruskal kruskal = new Kruskal();
 				resultado = kruskal.arvoreGeradoraMinima(grafo);
-				//CriaGrafoSaida.CriarSaidaGrafo(grafo,diretorio, "kruskal", resultado);
+				CriaGrafoSaida.CriarGrafoResultado(diretorio, "kruskal", resultado, saidaGrafo);
 				CriaGrafoSaida.geraHtml(resultado,diretorio, "kruskal");
 				
 				break;

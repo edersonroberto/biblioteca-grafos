@@ -16,14 +16,18 @@ public class CriaGrafoSaida {
 
 		vertices = grafo.getVertices();
 		matAdj = grafo.getMatAdj();
+		String direcao = "";
+		
+		if (grafo.ehDirecionado())
+			direcao = ",'directed': true";
 		String arquivo;
 		System.out.println("Gerando Plotagem do Grafo...");
-
+		
 		arquivo = montaInicioDoGrafo();
 
 		arquivo += criaOsVerticesDoGrafo();
 
-		arquivo += criaAsArestasDoGrafo(nome, resultado);
+		arquivo += criaAsArestasDoGrafo(nome, resultado, direcao);
 
 		diretorio += "js/" + nome + ".js";
 
@@ -60,8 +64,8 @@ public class CriaGrafoSaida {
 	}
 
 	// Cria as arestas do grafo
-	private static String criaAsArestasDoGrafo(String nome, String resultado) {
-
+	private static String criaAsArestasDoGrafo(String nome, String resultado, String direcao) {
+		
 		String arquivo = "";
 		// Usado para fazer com que as arestas não fiquem muito grande no grafo
 		int divisor = defineDivisorDasArestas();
@@ -70,7 +74,7 @@ public class CriaGrafoSaida {
 			for (int j = 0; j < vertices.size(); j++) {
 				if (matAdj[i][j] != 0) {
 					arquivo += "sys.addEdge('a" + vertices.get(i) + "', 'a"
-							+ vertices.get(j) + "',{'color':'green'"
+							+ vertices.get(j) + "',{'color':'green'" + direcao
 							+ ", 'weight':" + matAdj[i][j] / divisor + "});\n";
 
 				}
@@ -129,10 +133,20 @@ public class CriaGrafoSaida {
 			saidaComando = VerificaResultado.verificaNoResultadoDaDistancia(resultado, saidaGrafo );
 		
 			GravaSaida.gravarSaida(saidaComando, diretorio);
-		
+		break;
 		case "buscaPorProfundidade": case "buscaPorLargura":
 			saidaComando = VerificaResultado.verificaNoResultadoBusca(resultado, saidaGrafo);
 			GravaSaida.gravarSaida(saidaComando, diretorio);
+			break;
+		case "prim": case "kruskal":
+			
+			saidaComando = VerificaResultado.verificaNoResultadoPrimKruskal(resultado, saidaGrafo);
+			GravaSaida.gravarSaida(saidaComando, diretorio);
+			break;
+		case "dijkstra":
+			saidaComando = VerificaResultado.verificaNoResultadoDijkstra(resultado, saidaGrafo);
+			GravaSaida.gravarSaida(saidaComando, diretorio);
+			break;
 			
 		default: return;
 		

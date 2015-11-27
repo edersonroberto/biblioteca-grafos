@@ -46,7 +46,7 @@ public class ControladorGrafo {
 		
 		ehConexo = verificaConexidade();
 		
-		grafo = new Grafo(vertices, arrayAdj, arestas, ehConexo, temPeso);
+		grafo = new Grafo(vertices, arrayAdj, arestas, ehConexo, temPeso, ehDirecionado);
 
 		return grafo;
 	}

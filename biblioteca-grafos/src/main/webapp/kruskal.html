@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Algoritmo de Kruskal</title>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/arbor.js"></script>
@@ -14,8 +14,6 @@
 <body>
 
 	<div id="principal">
-
-
 		<div id="sse1">
 			<div id="sses1">
 				<ul>
@@ -27,15 +25,17 @@
 							Profundidade</a></li>
 					<li><a href="dijkstra.html">Dijkstra</a></li>
 					<li><a href="prim.html">Prim</a></li>
+					<li><a href="kruskal.html">Kruskal</a></li>
 				</ul>
 			</div>
 		</div>
+		<div>
+			<canvas id="viewport" width="600" height="400"></canvas>
+			<script src="resources/js/kruskal.js"></script>
+		</div>
 
-		<canvas id="viewport" width="600" height="400"></canvas>
-		<script src="resources/js/kruskal.js"></script>
-
-		<iframe src="resources/html/kruskal.html" seamless="seamless"
-			style="position: absolute; left: 70%; top: 20%"></iframe>
+		<iframe src="resources/html/kruskal.html" height="400" width="240"
+			style="position: absolute; left: 72%; top: 12%;"></iframe>
 
 	</div>
 </body>

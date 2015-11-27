@@ -8,7 +8,6 @@ public class Dijkstra {
 
 	private List<String> vertices;
 	private List<Aresta> arestas;
-	//private int matAdj[][];
 	private HashMap<String, Integer> distancias;
 	private HashMap<String, String> anteriores;
 	private List<String> naoVisitados;
@@ -48,6 +47,7 @@ public class Dijkstra {
 		return caminho + "\n";
 	}
 	
+	//Caso um novo vertice não tenha sido definido é pego o primeiro vertice na lista
 	private String defineNovoVertice() {
 		
 		return naoVisitados.get(0);

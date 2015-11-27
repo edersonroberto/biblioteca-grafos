@@ -9,13 +9,17 @@ public class Grafo {
 	private int matAdj[][];
 	private boolean ehConexo;
 	private boolean temPeso;
+	private boolean ehDirecionado;
+	
 
-	public Grafo(List<String> vertices, int matAdj[][], List<Aresta> arestas, boolean ehConexo, boolean temPeso) {
+
+	public Grafo(List<String> vertices, int matAdj[][], List<Aresta> arestas, boolean ehConexo, boolean temPeso, boolean ehDirecionado) {
 		this.vertices = vertices;
 		this.matAdj = matAdj;
 		this.arestas = arestas;
 		this.ehConexo = ehConexo;
 		this.temPeso = temPeso;
+		this.ehDirecionado = ehDirecionado;
 	}
 	
 
@@ -37,6 +41,9 @@ public class Grafo {
 
 	public boolean ehConexo() {
 		return ehConexo;
+	}
+	public boolean ehDirecionado() {
+		return ehDirecionado;
 	}
 
 }

@@ -54,12 +54,10 @@ public class ControladorGrafo {
 
 
 	private void montaVertices(List<String> linhas){
-		TrataLinha trataLinha = new TrataLinha();
-		
 		
 		linha = linhas.get(0);
 	
-		caracteres = trataLinha.trataLinha(linha);
+		caracteres = TrataLinha.trataLinha(linha);
 
 		for (String caracter : caracteres) {
 			vertices.add(caracter);
@@ -69,7 +67,6 @@ public class ControladorGrafo {
 	}
 	
 	private int[][] montaArrayAdjacencia(List<String> linhas) {
-		TrataLinha trataLinha = new TrataLinha();
 		int tamArray = vertices.size();
 		arrayAdj = new int[tamArray][tamArray];
 	
@@ -79,7 +76,7 @@ public class ControladorGrafo {
 		
 		while(!linhas.get(0).equals("")){	
 			linha = linhas.get(0);
-			caracteres = trataLinha.trataLinha(linha);
+			caracteres =TrataLinha.trataLinha(linha);
 			
 			montaArestas();
 			

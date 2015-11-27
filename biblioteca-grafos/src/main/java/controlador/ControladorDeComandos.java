@@ -21,7 +21,7 @@ public class ControladorDeComandos {
 	public void executaComandos(Grafo grafo, List<String> linhas, String diretorio, String saidaGrafo) {
 		
 		contDistancia = 1;
-		arquivoSaida = new ArquivoDeSaida("C:/saida/");
+		arquivoSaida = new ArquivoDeSaida("C:/saida/saida-");
 		String caracteres[];
 		this.grafo = grafo;
 		linhas.remove("Comandos");

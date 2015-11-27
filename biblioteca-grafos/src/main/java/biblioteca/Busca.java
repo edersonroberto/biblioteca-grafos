@@ -38,7 +38,7 @@ public class Busca {
 				// Percorre a matriz de adjacencia comparando a linha da matriz
 				// com o vertice atual,
 				// Quando encontra o vertice percorre a coluna e encontra os
-				// vizinhos do vertice atua.
+				// vizinhos do vertice atual.
 				for (int i = 0; i < vertices.size(); i++) {
 					if (verticeAtual.equals(vertices.get(i))) {
 						for (int j = 0; j < vertices.size(); j++) {

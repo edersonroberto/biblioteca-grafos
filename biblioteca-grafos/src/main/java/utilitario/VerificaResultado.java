@@ -1,6 +1,5 @@
 package utilitario;
 
-import java.util.List;
 
 public class VerificaResultado {
 	

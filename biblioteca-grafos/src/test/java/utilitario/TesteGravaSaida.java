@@ -6,11 +6,10 @@ import org.junit.Test;
 
 public class TesteGravaSaida {
 	
-	
 	@Test(expected=RuntimeException.class)
 	public void testaCriarSaidaGrafoComErro(){
 		
-		GravaSaida.gravarSaida("", "arquivoVazio.txt");
+		GravaSaida.gravarSaida("", "c:/saida/arquivoVazio.txt");
 			
 	}
 	

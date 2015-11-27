@@ -104,9 +104,9 @@ public class CriaGrafoSaida {
 
 	public static void geraHtml(String resultado, String diretorio,
 			String nomeArquivo) {
-		String saidaHtml = "<body bgcolor ='A2F0E7'  text ='red' >";
+		String saidaHtml = "<body text ='red' >";
 		String resultados[] = resultado.split("\n");
-
+		saidaHtml +="<br/ >\n";
 		saidaHtml += "<ol><b><u><li > " + resultados[0] + "</li></u></b> </ol>";
 		saidaHtml += "<ul><i>\n";
 		for (int i = 1; i < resultados.length; i++) {
@@ -117,7 +117,10 @@ public class CriaGrafoSaida {
 
 		diretorio += "html/" + nomeArquivo + ".html";
 
-		GravaSaida.gravarSaida(saidaHtml, diretorio);
+		if (GravaSaida.gravarSaida(saidaHtml, diretorio))
+			System.out.println("Arquivo salvo com sucesso! " + diretorio);
+		else
+			System.out.println("Falha ao salvar Arquivo! " + diretorio);
 
 	}
 
@@ -132,20 +135,32 @@ public class CriaGrafoSaida {
 			
 			saidaComando = VerificaResultado.verificaNoResultadoDaDistancia(resultado, saidaGrafo );
 		
-			GravaSaida.gravarSaida(saidaComando, diretorio);
+			if(GravaSaida.gravarSaida(saidaComando, diretorio))
+				System.out.println("Arquivo salvo com sucesso!" + diretorio);
+			else
+				System.out.println("Falha ao salvar arquivo!" + diretorio);
 		break;
 		case "buscaPorProfundidade": case "buscaPorLargura":
 			saidaComando = VerificaResultado.verificaNoResultadoBusca(resultado, saidaGrafo);
-			GravaSaida.gravarSaida(saidaComando, diretorio);
+			if(GravaSaida.gravarSaida(saidaComando, diretorio))
+				System.out.println("Arquivo salvo com sucesso!" + diretorio);
+			else
+				System.out.println("Falha ao salvar arquivo!" + diretorio);
 			break;
 		case "prim": case "kruskal":
 			
 			saidaComando = VerificaResultado.verificaNoResultadoPrimKruskal(resultado, saidaGrafo);
-			GravaSaida.gravarSaida(saidaComando, diretorio);
+			if(GravaSaida.gravarSaida(saidaComando, diretorio))
+				System.out.println("Arquivo salvo com sucesso!" + diretorio);
+			else
+				System.out.println("Falha ao salvar arquivo!" + diretorio);
 			break;
 		case "dijkstra":
 			saidaComando = VerificaResultado.verificaNoResultadoDijkstra(resultado, saidaGrafo);
-			GravaSaida.gravarSaida(saidaComando, diretorio);
+			if(GravaSaida.gravarSaida(saidaComando, diretorio))
+				System.out.println("Arquivo salvo com sucesso!" + diretorio);
+			else
+				System.out.println("Falha ao salvar arquivo!" + diretorio);
 			break;
 			
 		default: return;
